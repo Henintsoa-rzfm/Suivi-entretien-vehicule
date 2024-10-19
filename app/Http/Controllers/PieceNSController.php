@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PieceN;
+// use App\Models\PieceN;
+use App\Models\PieceNS;
 use App\Models\Equipement;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ class PieceNSController extends Controller
     
     public function create()
     {        
-        $pieceN = PieceN::all();
+        $pieceN = PieceNS::all();
         $equipements = Equipement::all();
-        $max = PieceN::max('id');
+        $max = PieceNS::max('id');
 
         return view('addpiecens',[
             'pieceN' => $pieceN,
@@ -33,7 +34,7 @@ class PieceNSController extends Controller
             'equipement_id' => 'required'
         ]);
 
-        PieceN::create($validateData);
+        PieceNS::create($validateData);
 
         return redirect('/equipements/create');
         // ->with('success', 'Voiture enregistrée avec succès')

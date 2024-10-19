@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateViewView extends Migration
+class CreatePieceNSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateViewView extends Migration
      */
     public function up()
     {
-        Schema::create('view_view', function (Blueprint $table) {
+        Schema::create('piece_n_s', function (Blueprint $table) {
             $table->id();
+            $table->string('NomPiece');
+            $table->foreignId('equipement_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateViewView extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('view_view');
+        Schema::dropIfExists('piece_n_s');
     }
 }

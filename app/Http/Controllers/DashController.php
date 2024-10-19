@@ -34,7 +34,8 @@ class DashController extends Controller
         $panneMve = DB::table('d_pannes')->join('pannes', 'd_pannes.panne_id', '=', 'pannes.id')->select('TypePanne')->groupBy('d_pannes.panne_id')->orderBy('panne_id', 'DESC')->get();
         $user = Auth::user();
         $andro = Carbon::now();
-        $o = date('d', strtotime($andro));
+        // $o = date('d', strtotime($andro));
+        $o = $andro->day;
         $detenteurs = Detenteur::count();
         $detenteurV = DB::table('detenteurs')->join('vehicules', 'detenteurs.id', '=','vehicules.detenteur_id' )->count();
         $pannes = DPanne::all()->count();

@@ -43,7 +43,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/dash', [DashController::class, 'index'])->name('dash');
 
-Route::get('/special', [SpecialController::class, 'index'])->name('special');
+// Route::get('/special', [SpecialController::class, 'index'])->name('special');
 
 Route::get('/vehicules', [VehiculeController::class, 'index'])->name('principal');
 Route::get('/vehicules/create', [VehiculeController::class, 'create'])->name('vehicules.create');
