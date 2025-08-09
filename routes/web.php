@@ -36,12 +36,14 @@ use App\Http\Controllers\IntervenirEntretienController;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/dashboard', function () {  
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {  
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
-
-Route::get('/dash', [DashController::class, 'index'])->name('dash');
+Route::get('/dash', [DashController::class, 'index'])
+    ->middleware('auth')
+    ->name('dash');
+// Route::get('/dash', [DashController::class, 'index'])->name('dash');
 
 // Route::get('/special', [SpecialController::class, 'index'])->name('special');
 

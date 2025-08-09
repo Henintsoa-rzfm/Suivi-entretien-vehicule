@@ -15,9 +15,6 @@ use App\Models\Detenteur;
 use App\Models\Equipement;
 use App\Models\Mecanicien;
 use App\Models\Intervention;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
