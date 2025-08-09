@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Personnel;
 
 use Carbon\Carbon;
-use App\Models\Division;
 use App\Models\Mecanicien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class MecanicienController extends Controller
 {

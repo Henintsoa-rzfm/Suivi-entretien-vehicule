@@ -22,7 +22,7 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0">
-                          @if ($nbC> 0)
+                          @if ($stats['nbC']> 0)
                               100 %
                           @else
                               0 %
@@ -37,7 +37,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Chauffeurs : {{ $nbC }}</h6>
+                  <h6 class="text-secondary font-weight-normal">Chauffeurs : {{ $stats['nbC'] }}</h6>
                 </div>
               </div>
             </div>
@@ -48,8 +48,8 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0">
-                          @if ( $mois>0 )
-                            {{round(($mois*100)/$nbC)}} %
+                          @if ( $stats['mois']>0 )
+                            {{round(($stats['mois']*100)/$stats['nbC'])}} %
                           @else
                               0 %
                           @endif
@@ -63,7 +63,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Chauffeurs inscrits ce mois : {{$mois}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Chauffeurs inscrits ce mois : {{$stats['mois']}}</h6>
                 </div>
               </div>
             </div>
@@ -74,8 +74,8 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0">
-                          @if ( $semaine>0 )
-                            {{round(($semaine*100)/$nbC, 2)}} %
+                          @if ( $stats['semaine']>0 )
+                            {{round(($stats['semaine']*100)/$stats['nbC'], 2)}} %
                           @else
                               0 %
                           @endif
@@ -89,7 +89,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Chauffeurs inscrits cette semaine : {{$semaine}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Chauffeurs inscrits cette semaine : {{$stats['semaine']}}</h6>
                 </div>
               </div>
             </div>
@@ -100,8 +100,8 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0">
-                          @if ( $day>0 )
-                            {{round(($day*100)/$nbC, 2)}} %
+                          @if ( $stats['day']>0 )
+                            {{round(($stats['day']*100)/$stats['nbC'], 2)}} %
                           @else
                               0 %
                           @endif
@@ -115,7 +115,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Chauffeurs inscrits aujourd'hui : {{$day}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Chauffeurs inscrits aujourd'hui : {{$stats['day']}}</h6>
                 </div>
               </div>
             </div>

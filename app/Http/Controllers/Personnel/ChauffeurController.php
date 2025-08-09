@@ -7,84 +7,73 @@ use App\Models\Chauffeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chauffeur\StoreChauffeurRequest;
+use App\Http\Requests\Chauffeur\UpdateChauffeurRequest;
+use App\Services\Chauffeurs\ChauffeurService;
 
 class ChauffeurController extends Controller
 {
-    public function __construct()
+    private ChauffeurService $chauffeurService;
+
+    public function __construct(ChauffeurService $chauffeurService)
     {
         $this->middleware('auth');
+        $this->chauffeurService = $chauffeurService;
     }
     
     public function index()
     {
-        $chauffeurs = Chauffeur::all();
-        $nbC = DB::table('chauffeurs')->whereNotIn('Chauffeur',['Aucun'])->count();
-        $mois = Chauffeur::whereMonth('created_at', '=', now()->month)->count();
-        $day = Chauffeur::whereDay('created_at','=', now()->day)->count();
-        $semaine = Chauffeur::whereBetween('created_at', [Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->get()->count();
+        $chauffeurs = $this->chauffeurService->getAllChauffeurs();
+        $stats = $this->chauffeurService->getDashboardStats();
 
-        return view('chauffeurs', [
+        return view('chauffeur.chauffeurs', [
             'chauffeurs' => $chauffeurs,
-            'nbC' => $nbC,
-            'mois' => $mois,
-            'day' => $day,
-            'semaine' => $semaine
+            'stats' => $stats
         ]);
     }
 
     public function create()
     {        
-        $chauffeurs = Chauffeur::all();
-        $max = DB::table('chauffeurs')->max('id');
+        $chauffeurNextId = $this->chauffeurService->getNextId();
 
-        return view('addChauffeur',[
-            'chauffeurs' => $chauffeurs,
-            'max' => $max
+        return view('chauffeur.addChauffeur',[
+            'chauffeurNextId' => $chauffeurNextId
         ]);
     }
     
-    public function store(Request $request)
+    public function store(StoreChauffeurRequest $request)
     {
-        $validateData = $request->validate([
-            'MatrCh' => 'required|numeric|digits:6',
-            'Chauffeur' => 'required'
-        ]);
-
-        Chauffeur::create($validateData);
-
+        $this->chauffeurService->create($request->validated());
         return redirect('/chauffeurs');
-        // ->with('success', 'Voiture enregistrée avec succès')
     }
 
     public function show($id)
     {
-        $chauffeur = Chauffeur::findOrfail($id);
+        $chauffeur = $this->chauffeurService->find($id);
 
-        return view('Chauffeur', [
+        return view('chauffeur.Chauffeur', [
             'chauffeur' => $chauffeur
         ]);
     }
 
     public function edit($id)
     {
-        $chauffeur = Chauffeur::findOrfail($id);
+        $chauffeur = $this->chauffeurService->find($id);
 
-        return view('editChauffeur', [
+        return view('chauffeur.editChauffeur', [
             'chauffeur' => $chauffeur,
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateChauffeurRequest $request, $id)
     {
-        $validateData = $request->validate([
-            'MatrCh' => 'required|numeric|digits:6',
-            'Chauffeur' => 'required',
-        ]);
-
-        Chauffeur::whereId($id)->update($validateData);
+        $validateData = $request->validated();
+        $this->chauffeurService->update($id, $validateData);
+        
         return redirect('/chauffeurs');
     }
 
+    //Pending
     public function destroy($id)
     {
         $chauffeur = Chauffeur::findOrfail($id);

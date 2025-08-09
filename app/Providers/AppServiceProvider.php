@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Repository\ChauffeurRepository;
 use App\Repositories\Repository\DetenteurRepository;
+use App\Repositories\Interfaces\ChauffeurRepositoryInterface;
 use App\Repositories\Interfaces\DetenteurRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(DetenteurRepositoryInterface::class, DetenteurRepository::class);
+        $this->app->bind(ChauffeurRepositoryInterface::class, ChauffeurRepository::class);
     }
 
     /**
