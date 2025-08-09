@@ -5,9 +5,6 @@
 .ton{font-weight: bold}
 </style>
 <div class="container text-dark" style="position: relative">
-    <div class="op" style="margin-top: -50px">
-        <p class="display-6 ity">Tableau de bord : {{--$vfaire--}}</p>
-    </div><br><br>
     <div class="row">
       <section class="container">
         <div class="row">

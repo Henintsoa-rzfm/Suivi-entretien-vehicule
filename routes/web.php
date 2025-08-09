@@ -14,11 +14,11 @@ use App\Http\Controllers\SpecialController;
 use App\Http\Controllers\ContenirController;
 use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\AssuranceController;
-use App\Http\Controllers\ChauffeurController;
-use App\Http\Controllers\DetenteurController;
+use App\Http\Controllers\Personnel\ChauffeurController;
+use App\Http\Controllers\Personnel\DetenteurController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\EquipementController;
-use App\Http\Controllers\MecanicienController;
+use App\Http\Controllers\Personnel\MecanicienController;
 use App\Http\Controllers\InterventionController;
 use App\Http\Controllers\IntervenirEntretienController;
 
