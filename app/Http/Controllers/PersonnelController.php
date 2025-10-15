@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class PersonnelController extends Controller
@@ -11,12 +10,13 @@ class PersonnelController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         if (! Gate::allows('access-admin')) {
             abort(403);
         }
+
         return view('personnel');
     }
 }

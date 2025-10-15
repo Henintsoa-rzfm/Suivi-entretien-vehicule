@@ -2,11 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\PieceN;
-use App\Models\Contenir;
-use App\Models\Vehicule;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Equipement extends Model
 {
@@ -18,6 +15,7 @@ class Equipement extends Model
     {
         return $this->hasOne(Contenir::class);
     }
+
     public function vehicules()
     {
         return $this->belongsToMany(Vehicule::class, 'contenirs')->withPivot('dernierKM');

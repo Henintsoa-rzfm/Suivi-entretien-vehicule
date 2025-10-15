@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Panne;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class DPanne extends Model
 {
     use HasFactory;
 
     protected $fillable = ['vehicule_id', 'panne_id', 'DatePanne'];
-
 
     public function vehicule()
     {

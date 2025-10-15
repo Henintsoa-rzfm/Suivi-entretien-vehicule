@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App\Models\PieceN;
-use App\Models\PieceNS;
 use App\Models\Equipement;
+use App\Models\PieceNS;
 use Illuminate\Http\Request;
 
 class PieceNSController extends Controller
@@ -13,25 +13,25 @@ class PieceNSController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function create()
-    {        
+    {
         $pieceN = PieceNS::all();
         $equipements = Equipement::all();
         $max = PieceNS::max('id');
 
-        return view('addpiecens',[
+        return view('addpiecens', [
             'pieceN' => $pieceN,
             'equipements' => $equipements,
-            'max' => $max
+            'max' => $max,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
             'NomPiece' => 'required',
-            'equipement_id' => 'required'
+            'equipement_id' => 'required',
         ]);
 
         PieceNS::create($validateData);

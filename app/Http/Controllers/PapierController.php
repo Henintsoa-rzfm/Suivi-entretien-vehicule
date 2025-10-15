@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class PapierController extends Controller
@@ -11,12 +10,13 @@ class PapierController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public  function index()
+
+    public function index()
     {
         if (! Gate::allows('access-admin')) {
             abort(403);
         }
+
         return view('papier');
     }
 }

@@ -2,12 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Piece;
-use App\Models\Nombre;
-use App\Models\Vehicule;
-use App\Models\Mecanicien;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Intervention extends Model
 {

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Services;
 
 use App\Repositories\VehiculeRepository;
@@ -12,14 +13,13 @@ class VehiculeService
         $this->vehiculeRepository = $vehiculeRepository;
     }
 
-    public function getDashboardStats()
+    public function getDashboardStats(): array
     {
         return [
-            'vehiclesCount' => $this->vehiculeRepository->countVehicles(),    
+            'vehiclesCount' => $this->vehiculeRepository->countVehicles(),
             'alertVehiclesCount' => $this->vehiculeRepository->countAlertVehicles(),
             'essenceVehiclesCount' => $this->vehiculeRepository->countEssenceVehicles(),
             'dieselVehiclesCount' => $this->vehiculeRepository->countDieselVehicles(),
         ];
     }
-
 }

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Contenir;
-use App\Models\Vehicule;
 use App\Models\Equipement;
+use App\Models\Vehicule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class ContenirController extends Controller
 {
@@ -16,26 +15,26 @@ class ContenirController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $contenirs = DB::table('contenirs')
-        ->join('vehicules', 'contenirs.vehicule_id', '=', 'vehicules.id' )
-        ->join('equipements', 'contenirs.equipement_id', '=', 'equipements.id' )
-        ->select('contenirs.*', 'vehicules.PlaqueImmatric', 'vehicules.Vehicule', 'vehicules.KMActuel','equipements.designation','equipements.kilometrageMax')
-        ->get();
+            ->join('vehicules', 'contenirs.vehicule_id', '=', 'vehicules.id')
+            ->join('equipements', 'contenirs.equipement_id', '=', 'equipements.id')
+            ->select('contenirs.*', 'vehicules.PlaqueImmatric', 'vehicules.Vehicule', 'vehicules.KMActuel', 'equipements.designation', 'equipements.kilometrageMax')
+            ->get();
         $equipements = Equipement::all();
         $vehicules = Vehicule::all();
         $max = Contenir::count('id');
-        $month = Contenir::whereMonth('created_at','=', now()->month, 'OR', 'updated_at', '=', now()->month )->count();
-        $day = Contenir::whereDay('created_at','=', now()->day , 'OR', 'updated_at', '=', now()->day)->count();
-        $week = Contenir::whereBetween('updated_at', [Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])->get()->count();
+        $month = Contenir::whereMonth('created_at', '=', now()->month, 'OR', 'updated_at', '=', now()->month)->count();
+        $day = Contenir::whereDay('created_at', '=', now()->day, 'OR', 'updated_at', '=', now()->day)->count();
+        $week = Contenir::whereBetween('updated_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get()->count();
         $special = DB::table('vehicules')
-        ->join('contenirs', 'vehicules.id', 'contenirs.vehicule_id') 
-        ->join('equipements','equipements.id','contenirs.equipement_id') 
-        ->whereRaw('vehicules.KMActuel-contenirs.dernierKM >= equipements.kilometrageMax')
-        ->select('vehicules.*', 'contenirs.designation')
-        ->count('vehicules.id');
+            ->join('contenirs', 'vehicules.id', 'contenirs.vehicule_id')
+            ->join('equipements', 'equipements.id', 'contenirs.equipement_id')
+            ->whereRaw('vehicules.KMActuel-contenirs.dernierKM >= equipements.kilometrageMax')
+            ->select('vehicules.*', 'contenirs.designation')
+            ->count('vehicules.id');
 
         return view('contenirs', [
             'contenirs' => $contenirs,
@@ -45,7 +44,7 @@ class ContenirController extends Controller
             'month' => $month,
             'week' => $week,
             'day' => $day,
-            'special' => $special
+            'special' => $special,
         ]);
     }
 
@@ -55,21 +54,21 @@ class ContenirController extends Controller
         $equipements = Equipement::all();
         $vehicules = Vehicule::all();
         $max = Contenir::count('id');
-        
-        return view('addcontenir',[
+
+        return view('addcontenir', [
             'contenirs' => $contenirs,
             'equipements' => $equipements,
             'vehicules' => $vehicules,
-            'max' => $max
+            'max' => $max,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'equipement_id' => 'required|unique:contenirs,equipement_id,null,null,vehicule_id,'. $request->vehicule_id,
+            'equipement_id' => 'required|unique:contenirs,equipement_id,null,null,vehicule_id,'.$request->vehicule_id,
             'vehicule_id' => 'required',
-            'dernierKM' => 'required|numeric'
+            'dernierKM' => 'required|numeric',
         ]);
 
         Contenir::create($validateData);
@@ -83,7 +82,7 @@ class ContenirController extends Controller
         $contenir = Contenir::findOrfail($id);
 
         return view('contenir', [
-            'contenir' => $contenir
+            'contenir' => $contenir,
         ]);
     }
 
@@ -92,11 +91,11 @@ class ContenirController extends Controller
         $contenir = Contenir::findOrfail($id);
         $vehicules = Vehicule::all();
         $equipements = Equipement::all();
-    
+
         return view('editContenir', [
             'contenir' => $contenir,
             'vehicules' => $vehicules,
-            'equipements' => $equipements
+            'equipements' => $equipements,
         ]);
     }
 
@@ -105,9 +104,10 @@ class ContenirController extends Controller
         $validateData = $request->validate([
             'equipement_id' => 'required',
             'vehicule_id' => 'required',
-            'dernierKM' => 'required|numeric'
+            'dernierKM' => 'required|numeric',
         ]);
         Contenir::whereId($id)->update($validateData);
+
         return redirect('/contenirs');
     }
 
@@ -118,5 +118,4 @@ class ContenirController extends Controller
 
         return redirect('/contenirs');
     }
-    
 }

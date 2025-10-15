@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Panne;
@@ -10,61 +11,63 @@ class PanneController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $pannes = Panne::all();
+
         return view('pannes', [
-            'pannes' => $pannes
+            'pannes' => $pannes,
         ]);
     }
-    
+
     public function create()
-    {        
+    {
         $pannes = Panne::all();
         $max = Panne::max('id');
 
-        return view('addPanne',[
+        return view('addPanne', [
             'pannes' => $pannes,
-            'max' => $max
+            'max' => $max,
         ]);
     }
 
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'TypePanne' => 'required|unique:pannes,TypePanne'
+            'TypePanne' => 'required|unique:pannes,TypePanne',
         ]);
         Panne::create($validateData);
+
         return redirect('/dpannes');
     }
-
 
     public function show($id)
     {
         $panne = Panne::findOrfail($id);
 
         return view('panne', [
-            'panne' => $panne
+            'panne' => $panne,
         ]);
     }
 
     public function edit($id)
     {
         $panne = Panne::findOrfail($id);
-    
+
         return view('editPanne', [
-            'panne' => $panne
+            'panne' => $panne,
         ]);
     }
 
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'TypePanne' => 'required'
+            'TypePanne' => 'required',
         ]);
 
         Panne::whereId($id)->update($validateData);
+
         return redirect('/pannes');
     }
 
@@ -75,6 +78,4 @@ class PanneController extends Controller
 
         return redirect('/pannes');
     }
-
-
 }

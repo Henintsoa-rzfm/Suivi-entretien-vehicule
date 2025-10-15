@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Piece;
-use App\Models\Nombre;
 use App\Models\Intervention;
+use App\Models\Nombre;
+use App\Models\Piece;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,14 +14,14 @@ class NombreController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $nombres = DB::table('nombres')
-        ->join('pieces', 'nombres.piece_id', '=', 'pieces.id' )
-        ->join('interventions', 'nombres.intervention_id', '=', 'interventions.id' )
-        ->select('nombres.*', 'pieces.Piece', 'interventions.nature')
-        ->get();
+            ->join('pieces', 'nombres.piece_id', '=', 'pieces.id')
+            ->join('interventions', 'nombres.intervention_id', '=', 'interventions.id')
+            ->select('nombres.*', 'pieces.Piece', 'interventions.nature')
+            ->get();
         $pieces = Piece::all();
         $interventions = Intervention::all();
         $nbN = Nombre::count();
@@ -30,33 +30,33 @@ class NombreController extends Controller
             'nombres' => $nombres,
             'pieces' => $pieces,
             'interventions' => $interventions,
-            'nbN' => $nbN
+            'nbN' => $nbN,
         ]);
     }
 
     public function create()
-    {        
+    {
         $nombres = Nombre::all();
         $pieces = Piece::all();
         // $interventions = Intervention::all();
         $interventions = DB::table('interventions')->join('vehicules', 'vehicules.id', 'interventions.vehicule_id')
-        ->whereNotIn('Validation',['Validée'])->select('interventions.*')->select('interventions.*', 'vehicules.PlaqueImmatric')->get();
+            ->whereNotIn('Validation', ['Validée'])->select('interventions.*')->select('interventions.*', 'vehicules.PlaqueImmatric')->get();
         $max = Nombre::max('id');
 
-        return view('addnombre',[
+        return view('addnombre', [
             'nombres' => $nombres,
             'pieces' => $pieces,
             'interventions' => $interventions,
-            'max' => $max
+            'max' => $max,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
             'piece_id' => 'required',
             'intervention_id' => 'required',
-            'Nombre' => 'required|numeric'
+            'Nombre' => 'required|numeric',
         ]);
 
         Nombre::create($validateData);
@@ -70,7 +70,7 @@ class NombreController extends Controller
         $nombre = Nombre::findOrfail($id);
 
         return view('nombre', [
-            'nombre' => $nombre
+            'nombre' => $nombre,
         ]);
     }
 
@@ -79,7 +79,7 @@ class NombreController extends Controller
     // //     $nombre = Nombre::findOrfail($id);
     // //     $pieces = Piece::all();
     // //     $interventions = Intervention::all();
-    
+
     // //     return view('editNombre', [
     // //         'nombre' => $nombre,
     // //         'pieces' => $pieces,
@@ -92,10 +92,11 @@ class NombreController extends Controller
         $validateData = $request->validate([
             'piece_id' => 'required',
             'intervention_id' => 'required',
-            'Nombre' => 'required|numeric'
+            'Nombre' => 'required|numeric',
         ]);
 
         Nombre::whereId($id)->update($validateData);
+
         return redirect('/nombres');
     }
 
@@ -106,5 +107,4 @@ class NombreController extends Controller
 
         return redirect('/nombres');
     }
-
 }

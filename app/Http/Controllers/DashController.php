@@ -2,63 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Panne;
-use App\Models\DPanne;
-use App\Models\Nombre;
-use App\Models\PieceN;
-use App\Models\Visite;
-use App\Models\Vehicule;
 use App\Models\Assurance;
+use App\Models\DPanne;
 use App\Models\Equipement;
 use App\Models\Intervention;
-use Illuminate\Support\Facades\DB;
+use App\Models\Nombre;
+use App\Models\Panne;
+use App\Models\PieceN;
+use App\Models\Visite;
+use App\Services\VehiculeService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashController extends Controller
 {
-    public function __construct()
+    protected readonly VehiculeService $vehiculeService;
+
+    public function __construct(VehiculeService $vehiculeService)
     {
         $this->middleware('auth');
+        $this->vehiculeService = $vehiculeService;
     }
-    
+
     public function index()
     {
-        $mverina = DB::table('d_pannes')->join('pannes', 'd_pannes.panne_id', '=', 'pannes.id')->select('TypePanne')->groupBy('d_pannes.panne_id')->orderBy('panne_id', 'DESC')->Limit(1)->get();
-        $panneMve = DB::table('d_pannes')->join('pannes', 'd_pannes.panne_id', '=', 'pannes.id')->select('TypePanne')->groupBy('d_pannes.panne_id')->orderBy('panne_id', 'DESC')->get();
+        $mverina = DB::table('d_pannes')->join('pannes', 'd_pannes.panne_id', '=', 'pannes.id')
+            ->select('TypePanne')->groupBy('d_pannes.panne_id')->orderBy('panne_id', 'DESC')->Limit(1)->get();
+        $panneMve = DB::table('d_pannes')->join('pannes', 'd_pannes.panne_id', '=', 'pannes.id')
+            ->select('TypePanne')->groupBy('d_pannes.panne_id')->orderBy('panne_id', 'DESC')->get();
         $user = Auth::user();
         $andro = Carbon::now();
         // $o = date('d', strtotime($andro));
         $o = $andro->day;
         $pannes = DPanne::all()->count();
         $todayPanne = DPanne::where('DatePanne', '=', $o)->count();
-        $vehicules = Vehicule::count();
         $piecens = PieceN::count();
         $pns = Panne::count();
         $visites = Visite::count();
-        // $vfaire = DB::table('visites')->where('DateLimite');
         $assurances = Assurance::count();
-        $nbE = DB::table('vehicules')->where("Energie", "Essence")->count();
-        $nbD = DB::table('vehicules')->where("Energie", "Diesel")->count();
         $interventions = Intervention::count();
         $entretiens = Equipement::count();
         $nombres = Nombre::count();
-        $intE = DB::table('interventions')->whereIn('Validation',['En attente'])->count();
-        $special = DB::table('vehicules')
-        ->join('contenirs', 'vehicules.id', 'contenirs.vehicule_id') 
-        ->join('equipements','equipements.id','contenirs.equipement_id') 
-        ->whereRaw('vehicules.KMActuel-contenirs.dernierKM >= equipements.kilometrageMax')
-        ->select('vehicules.*', 'contenirs.designation')
-        ->count('vehicules.id');
+        $intE = DB::table('interventions')->whereIn('Validation', ['En attente'])->count();
+        $stats = $this->vehiculeService->getDashboardStats();
 
         return view('dash', [
-            
-            
-            'vehicules' => $vehicules,
+            'vehicules' => $stats['vehiclesCount'],
             'pns' => $pns,
-            'nbE' => $nbE,
-            'nbD' => $nbD,
-            'pannes' =>$pannes,
+            'pannes' => $pannes,
             'andro' => $andro,
             'todayPanne' => $todayPanne,
             'o' => $o,
@@ -71,9 +63,8 @@ class DashController extends Controller
             'user' => $user,
             'mverina' => $mverina,
             'panneMve' => $panneMve,
-            'special' => $special,
-            'intE' => $intE
-            // 'vfaire' => $vfaire
+            'alertVehiclesCount' => $stats['alertVehiclesCount'],
+            'intE' => $intE,
         ]);
     }
 }

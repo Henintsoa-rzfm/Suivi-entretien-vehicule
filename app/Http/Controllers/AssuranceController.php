@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Vehicule;
 use App\Models\Assurance;
+use App\Models\Vehicule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,13 +14,13 @@ class AssuranceController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $assurances = DB::table('assurances')
-                        ->join('vehicules', 'assurances.vehicule_id', '=', 'vehicules.id')
-                        ->select('assurances.*', 'vehicules.PlaqueImmatric')
-                        ->get();
+            ->join('vehicules', 'assurances.vehicule_id', '=', 'vehicules.id')
+            ->select('assurances.*', 'vehicules.PlaqueImmatric')
+            ->get();
         $andro = Carbon::now();
         $max = DB::table('assurances')->count();
         $exp = DB::table('assurances')->where('Date_exp_Assurance', '<', now())->count();
@@ -29,43 +29,43 @@ class AssuranceController extends Controller
 
         return view('assurances', [
             'assurances' => $assurances,
-            'andro' =>$andro,
+            'andro' => $andro,
             'max' => $max,
             'exp' => $exp,
             'da' => $da,
-            'nbV' => $nbV
+            'nbV' => $nbV,
         ]);
     }
 
     public function create()
-    {        
+    {
         $assurances = Assurance::all();
         $vehicules = Vehicule::all();
         $max = DB::table('assurances')->max('id');
 
-        return view('addassurance',[
+        return view('addassurance', [
             'assurances' => $assurances,
             'vehicules' => $vehicules,
-            'max' => $max
+            'max' => $max,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $a = $request->DateAssurance;
         $b = Carbon::now();
         $c = '<h3 class="alert alert-danger" style="text-align : center; margin-top: 250px" >La date début de validité de l\'assurance ne peut pas être dans le futur</h3>';
-        if($a > $b){
+        if ($a > $b) {
             return $c;
-        }else{
+        } else {
             $validateData = $request->validate([
                 'DateAssurance' => 'required',
                 'Date_exp_Assurance' => 'required',
-                'vehicule_id' => 'required|unique:assurances,vehicule_id'
+                'vehicule_id' => 'required|unique:assurances,vehicule_id',
             ]);
-    
+
             assurance::create($validateData);
-    
+
             return redirect('/assurances');
         }
     }
@@ -77,7 +77,7 @@ class AssuranceController extends Controller
 
         return view('assurance', [
             'assurance' => $assurance,
-            'andro' => $andro
+            'andro' => $andro,
         ]);
     }
 
@@ -90,7 +90,7 @@ class AssuranceController extends Controller
         return view('editAssurance', [
             'assurance' => $assurance,
             'vehicules' => $vehicules,
-            'date1' => $date1
+            'date1' => $date1,
         ]);
     }
 
@@ -99,17 +99,18 @@ class AssuranceController extends Controller
         $a = $request->DateAssurance;
         $b = Carbon::now();
         $c = '<h3 class="alert alert-danger" style="text-align : center; margin-top: 250px" >La date début de validité de l\'assurance ne peut pas être dans le futur</h3>';
-        if($a > $b){
+        if ($a > $b) {
             return $c;
-        }else{
-        $validateData = $request->validate([
-            'DateAssurance' => 'required',
-            'Date_exp_Assurance' => 'required',
-            'vehicule_id' => 'required'
-        ]);
+        } else {
+            $validateData = $request->validate([
+                'DateAssurance' => 'required',
+                'Date_exp_Assurance' => 'required',
+                'vehicule_id' => 'required',
+            ]);
 
-        Assurance::whereId($id)->update($validateData);
-        return redirect('/assurances');
+            Assurance::whereId($id)->update($validateData);
+
+            return redirect('/assurances');
         }
     }
 
@@ -120,5 +121,4 @@ class AssuranceController extends Controller
 
         return redirect('/assurances');
     }
-    
 }
