@@ -140,7 +140,7 @@
                             <div class="d-flex align-items-center align-self-start">
                               <h3 class="mb-0 text-light">
                                 @if (isset($vehicules))
-                                  <span class="text-warning">{{$special}}</span>
+                                  <span class="text-warning">{{$alertVehiclesCount}}</span>
                                 @else
                                     0
                                 @endif
@@ -235,9 +235,6 @@
                               </td>
                               <td>Nombre de personnel</td>
                               <td class="text-right">
-                                {{-- @if (isset($chauffeurs) OR isset($mecaniciens) OR isset($detenteurs)) --}}
-                                    {{-- {{$chauffeurs + $detenteurs + $mecaniciens}} --}}
-                                {{-- @endif --}}
                               </td>
                               <td class="text-right font-weight-medium"> 100% </td>
                             </tr>

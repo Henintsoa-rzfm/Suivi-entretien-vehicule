@@ -6,47 +6,38 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Contenir;
 use App\Models\Vehicule;
-use App\Models\Equipement;
+use App\Repositories\VehiculeRepository;
+use App\Services\VehiculeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\Console\Input\Input;
 
 class VehiculeController extends Controller
 {
-    public function __construct()
+    protected readonly VehiculeService$vehiculeService;
+
+    public function __construct(VehiculeService $vehiculeService)
     {
         $this->middleware('auth');
+        $this->vehiculeService = $vehiculeService;
     }
     
-    public function index()
+    public function index(VehiculeRepository $vehiculesRepository)
     {
-        $vehicules = DB::table('vehicules')
-                        ->select('vehicules.*')
-                        // ->whereNotIn('Vehicule',['Passat'])
-                        ->orderBy('created_at', 'asc')
-                        ->get(); 
+        $vehicules = $vehiculesRepository->getAllVehicles(); 
         
         $user = Auth::user();
-        $nbV = DB::table('vehicules')->count(); 
-        $nbE = DB::table('vehicules')->where("Energie", "Essence")->count();
-        $nbD = DB::table('vehicules')->where("Energie", "Diesel")->count();
-        $special = DB::table('vehicules')
-        ->join('contenirs', 'vehicules.id', 'contenirs.vehicule_id') 
-        ->join('equipements','equipements.id','contenirs.equipement_id') 
-        ->whereRaw('vehicules.KMActuel-contenirs.dernierKM >= equipements.kilometrageMax')
-        ->select('vehicules.*', 'contenirs.designation')
-        ->count('vehicules.id');
+        $stats = $this->vehiculeService->getDashboardStats();
         $eq = Contenir::count();
 
         return view('vehicules', [
             'vehicules' => $vehicules,
-            'nbV' => $nbV,
-            'nbE' => $nbE,
-            'nbD' => $nbD,
+            'vehiclesCount' => $stats['vehiclesCount'],
+            'alertVehiclesCount' => $stats['alertVehiclesCount'],
+            'essenceVehiclesCount' => $stats['essenceVehiclesCount'],
+            'dieselVehiclesCount' => $stats['dieselVehiclesCount'],
             'user' => $user,
-            'special' => $special,
             'eq' => $eq
         ]);
     }
