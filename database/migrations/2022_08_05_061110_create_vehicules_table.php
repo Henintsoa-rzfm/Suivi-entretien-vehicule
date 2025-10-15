@@ -23,8 +23,6 @@ class CreateVehiculesTable extends Migration
             $table->Date('DateEntree');
             $table->Date('AnneeMenCirc');
             $table->integer('KMActuel');
-            $table->foreignId('chauffeur_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('detenteur_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

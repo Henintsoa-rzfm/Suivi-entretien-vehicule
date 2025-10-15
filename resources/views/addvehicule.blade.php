@@ -111,32 +111,7 @@
                   </div>
                   
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Détenteur</label>
-                      <div class="col-sm-9">
-                        <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="detenteur_id">
-                          @foreach ($detenteurs as $detenteur)
-                            <option value="{{$detenteur->id}}">{{$detenteur->Detenteur}}</option>    
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Chauffeur</label>
-                      <div class="col-sm-9">
-                        <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="chauffeur_id">
-                          @foreach ($chauffeurs as $chauffeur)
-                            <option selected value="{{$chauffeur->id}}">{{$chauffeur->Chauffeur}}</option>    
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </form>
             </div>
           </div>

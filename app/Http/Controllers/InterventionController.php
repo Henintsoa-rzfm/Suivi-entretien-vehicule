@@ -31,7 +31,6 @@ class InterventionController extends Controller
                                         ->where('DateLimite','<',now())
                                         ->where('DateIntervention','<',now())
                                         ->where('Validation','Validée')->count();
-        $mecaniciens = Mecanicien::all();
         $vehicules = Vehicule::all();
         $nombres = Nombre::all();
         $pieces = Piece::all();
@@ -40,7 +39,6 @@ class InterventionController extends Controller
 
         return view('interventions', [
             'interventions' => $interventions,
-            'mecaniciens' => $mecaniciens,
             'vehicules' => $vehicules,
             'nbI' => $nbI,
             'daty' => $daty,
@@ -56,7 +54,6 @@ class InterventionController extends Controller
     public function create()
     {
         $interventions = Intervention::all();
-        $mecaniciens = Mecanicien::all();
         $vehicules = Vehicule::all();
         $pieces = Piece::all();
         $max = Intervention::max('id');
@@ -64,7 +61,6 @@ class InterventionController extends Controller
 
         return view('addintervention',[
             'interventions' => $interventions,
-            'mecaniciens' => $mecaniciens,
             'vehicules' => $vehicules,
             'pieces' => $pieces,
             'max' => $max,
@@ -87,7 +83,6 @@ class InterventionController extends Controller
                 'DateIntervention' => 'required',
                 'Panne' => 'required',
                 'lieuIntervention' => 'required',
-                'mecanicien_id' => 'required',
                 'vehicule_id' => 'required',
                 'DateLimite' => 'required',
                 'Validation' => 'required'
@@ -120,13 +115,11 @@ class InterventionController extends Controller
     {
         $intervention = Intervention::findOrfail($id);
         $pieces = Piece::all();
-        $mecaniciens = Mecanicien::all();
         $vehicules = Vehicule::all();
         $max = Intervention::max('id');
         
         return view('editIntervention', [
             'intervention' => $intervention,
-            'mecaniciens' => $mecaniciens,
             'vehicules' => $vehicules,
             'max' => $max,
             'pieces' => $pieces
@@ -150,7 +143,6 @@ class InterventionController extends Controller
             'DateIntervention' => 'required',
             'Panne' => 'required',
             'lieuIntervention' => 'required',
-            'mecanicien_id' => 'required',
             'vehicule_id' => 'required',
             'DateLimite' => 'required',
             'Validation' => 'required'

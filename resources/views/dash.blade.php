@@ -14,7 +14,7 @@
                   <div class="row">
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
-                        <h3 class="mb-0 text-white">{{ $chauffeurs+$mecaniciens+$detenteurs }}</h3>
+                        <h3 class="mb-0 text-white"></h3>
                         <p class="text-primary ml-2 mb-0 font-weight-medium"></p>
                       </div>
                     </div>
@@ -236,7 +236,7 @@
                               <td>Nombre de personnel</td>
                               <td class="text-right">
                                 {{-- @if (isset($chauffeurs) OR isset($mecaniciens) OR isset($detenteurs)) --}}
-                                    {{$chauffeurs + $detenteurs + $mecaniciens}}
+                                    {{-- {{$chauffeurs + $detenteurs + $mecaniciens}} --}}
                                 {{-- @endif --}}
                               </td>
                               <td class="text-right font-weight-medium"> 100% </td>
@@ -247,16 +247,11 @@
                               </td>
                               <td>Nombre des détenteurs</td>
                               <td class="text-right">
-                                @if (isset($detenteurs))
-                                  {{$detenteurs}}
-                                @else
+                                
                                     0
-                                @endif
-                              </td>
+                                </td>
                               <td class="text-right font-weight-medium"> 
-                                @if (($chauffeurs + $detenteurs + $mecaniciens) > 0)
-                                  {{round(($detenteurs*100)/($chauffeurs + $detenteurs + $mecaniciens), 2)}}%
-                                @endif 
+                                
                               </td>
                             </tr>
                             <tr>
@@ -264,17 +259,11 @@
                                 <i class="fas fa-user"></i>
                               </td>
                               <td>Nombres des Chauffeurs</td>
-                              <td class="text-right">
-                                @if (isset($chauffeurs))
-                                  {{$chauffeurs}}
-                                @else
+                              <td class="text-right">  
                                     0
-                                @endif
                               </td>
                               <td class="text-right font-weight-medium">
-                                @if (($chauffeurs + $detenteurs + $mecaniciens) > 0)
-                                  {{round(($chauffeurs*100)/($chauffeurs + $detenteurs + $mecaniciens), 2)}}%
-                                @endif 
+                                
                               </td>
                             </tr>
                             <tr>
@@ -283,16 +272,10 @@
                               </td>
                               <td>Nombre des mécaniciens</td>
                               <td class="text-right">
-                                @if (isset($mecaniciens))
-                                  {{$mecaniciens}}
-                                @else
-                                    0
-                                @endif
+                                
                               </td>
                               <td class="text-right font-weight-medium">
-                                @if (($chauffeurs + $detenteurs + $mecaniciens) > 0)
-                                  {{round(($mecaniciens*100)/($chauffeurs + $detenteurs + $mecaniciens), 2)}}%
-                                @endif 
+                                
                               </td>
                             </tr>
                           </tbody>
