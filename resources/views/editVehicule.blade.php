@@ -136,70 +136,12 @@
                 @if (Auth::user()->admin)
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Détenteur</label>
-                      <div class="col-sm-9">
-                        <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="detenteur_id" value="{{$vehicule->detenteur_id}}">
-                          @foreach ($detenteurs as $detenteur)
-                            <option value="{{$detenteur->id}}" @if (old('detenteur_id') == $detenteur->id || $detenteur->id == $vehicule->detenteur_id)
-                                selected
-                            @endif>{{$detenteur->Detenteur}}</option>    
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+                    
 
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Chauffeur</label>
-                      <div class="col-sm-9">
-                        <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="chauffeur_id" value="{{$vehicule->chauffeur_id}}">
-                          @foreach ($chauffeurs as $chauffeur)
-                            <option value="{{$chauffeur->id}}" @if (old('chauffeur_id') == $chauffeur->id || $chauffeur->id == $vehicule->chauffeur_id)
-                                selected
-                            @endif>{{$chauffeur->Chauffeur}}</option>    
-                          @endforeach
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+                  
                 </div>
               
                 @else
-                <div style="display: none">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Détenteur</label>
-                        <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="detenteur_id" value="{{$vehicule->detenteur_id}}">
-                            @foreach ($detenteurs as $detenteur)
-                              <option value="{{$detenteur->id}}" @if (old('detenteur_id') == $detenteur->id || $detenteur->id == $vehicule->detenteur_id)
-                                  selected
-                              @endif>{{$detenteur->Detenteur}}</option>    
-                            @endforeach
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-  
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Chauffeur</label>
-                        <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="chauffeur_id" value="{{$vehicule->chauffeur_id}}">
-                            @foreach ($chauffeurs as $chauffeur)
-                              <option value="{{$chauffeur->id}}" @if (old('chauffeur_id') == $chauffeur->id || $chauffeur->id == $vehicule->chauffeur_id)
-                                  selected
-                              @endif>{{$chauffeur->Chauffeur}}</option>    
-                            @endforeach
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
       
                 @endif
                 

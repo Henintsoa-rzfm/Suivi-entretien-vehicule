@@ -38,10 +38,8 @@
         <p><u>CV </u>  :{{$vehicule->CV}} ph</p>
         <p><u>Date Entrée </u>  :{{ date('d M Y', strtotime($vehicule->DateEntree))}}</p>
         <p><u>Kilometrage Actuel </u>  :{{ $vehicule->KMActuel}} KM</p>
-        <p><u>Chauffeur </u>  :{{ $vehicule->Chauffeur->Chauffeur}}</p>
     </div>
     <div class="bla">
-        <br><p><u>Detenteur </u>  :{{ $vehicule->Detenteur->Detenteur}}</p>
         <p><u>Année de Mise en circulation : </u> {{ date('d M Y', strtotime($vehicule->AnneeMenCirc))}}</p>    
         <p><u>Mise à jour </u>  : {{ date('d M Y', strtotime($vehicule->updated_at))}}</p>
         <p><u>Date d'aujourd'hui </u>  : {{ date('d M Y', strtotime($date1))}}</p>

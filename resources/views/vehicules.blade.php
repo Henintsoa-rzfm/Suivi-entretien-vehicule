@@ -144,8 +144,6 @@
                 <th class="text-light font-weight-bold">Immatriculation</th>
                 <th class="text-light font-weight-bold">Véhicule</th>
                 <th class="text-light font-weight-bold">Energie</th>
-                <th class="text-light font-weight-bold">Chauffeur</th>
-                <th class="text-light font-weight-bold">Detenteur</th>
                 <th class="text-light font-weight-bold"></th>
             </tr>
             </thead>
@@ -158,9 +156,8 @@
                   <td><a style="text-decoration:none" href="{{route('vehicules.show', ['id' => $vehicule->id])}}">{{$vehicule->PlaqueImmatric}}</a></td>
                   <td><a style="text-decoration:none" href="{{route('vehicules.show', ['id' => $vehicule->id])}}">{{$vehicule->Vehicule}}</a></td>
                   <td><a style="text-decoration:none" href="{{route('vehicules.show', ['id' => $vehicule->id])}}">{{$vehicule->Energie}}</a></td>
-                  <td><a style="text-decoration:none" href="{{route('vehicules.show', ['id' => $vehicule->id])}}">{{$vehicule->Chauffeur}}</a></td>
-                  <td><a style="text-decoration:none" href="{{route('vehicules.show', ['id' => $vehicule->id])}}">{{$vehicule->Detenteur}}</a></td>
-                  <td>
+                  
+                   <td>
                       <a style="text-decoration:none" href="{{ route('vehicules.edit', $vehicule->id)}}" class="btn btn-success btn-circle">
                           <i class="fas fa-edit" style="color: white"></i>
                       </a>
