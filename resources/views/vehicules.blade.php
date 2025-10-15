@@ -27,7 +27,7 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0 text-secondary">
-                        @if ($nbV>0)
+                        @if ($vehiclesCount>0)
                           100%
                         @else
                             0
@@ -42,7 +42,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Nombre de véhicule : {{$nbV}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Nombre de véhicule : {{$vehiclesCount}}</h6>
                 </div>
               </div>
             </div>
@@ -53,8 +53,8 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0 text-warning">
-                          @if ($nbV>0)  
-                          {{round(((100 * $nbE)/ $nbV), 2)}} %
+                          @if ($vehiclesCount>0)  
+                          {{round(((100 * $essenceVehiclesCount)/ $vehiclesCount), 2)}} %
                           @else
                               0 %
                           @endif
@@ -68,7 +68,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Véhicules Essence : {{$nbE}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Véhicules Essence : {{$essenceVehiclesCount}}</h6>
                 </div>
               </div>
             </div>
@@ -79,8 +79,8 @@
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0 text-primary">
-                          @if ($nbV>0)  
-                            {{round(((100 * $nbD)/ $nbV), 2)}} %</h3>
+                          @if ($vehiclesCount>0)  
+                            {{round(((100 * $dieselVehiclesCount)/ $vehiclesCount), 2)}} %</h3>
                           @else
                               0 %
                           @endif
@@ -93,7 +93,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Véhicules Diesel : {{$nbD}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Véhicules Diesel : {{$dieselVehiclesCount}}</h6>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@
                       <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0 text-danger">
                           @if ($eq>0)  
-                          {{round((($special*100)/$eq), 2)}} %/{{$eq}}
+                          {{round((($alertVehiclesCount*100)/$eq), 2)}} %/{{$eq}}
                           @else
                               0 %
                           @endif
@@ -119,7 +119,7 @@
                       </div>
                     </div>
                   </div>
-                  <h6 class="text-secondary font-weight-normal">Alertes Entretien : <span class="text-danger">{{$special}}</span> sur {{$eq}}</h6>
+                  <h6 class="text-secondary font-weight-normal">Alertes Entretien : <span class="text-danger">{{$alertVehiclesCount}}</span> sur {{$eq}}</h6>
                 </div>
               </div>
             </div>
