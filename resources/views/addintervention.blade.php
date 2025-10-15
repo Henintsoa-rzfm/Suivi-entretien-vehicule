@@ -78,10 +78,8 @@
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Intervenant</label>
                         <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="mecanicien_id">
-                            @foreach ($mecaniciens as $mecanicien)
-                              <option selected value="{{$mecanicien->id}}">{{$mecanicien->Mecanicien}}</option>    
-                            @endforeach
+                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="">
+                            
                           </select>
                         </div>
                       </div>

@@ -10,10 +10,7 @@ use App\Models\PieceN;
 use App\Models\Visite;
 use App\Models\Vehicule;
 use App\Models\Assurance;
-use App\Models\Chauffeur;
-use App\Models\Detenteur;
 use App\Models\Equipement;
-use App\Models\Mecanicien;
 use App\Models\Intervention;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -33,13 +30,9 @@ class DashController extends Controller
         $andro = Carbon::now();
         // $o = date('d', strtotime($andro));
         $o = $andro->day;
-        $detenteurs = Detenteur::count();
-        $detenteurV = DB::table('detenteurs')->join('vehicules', 'detenteurs.id', '=','vehicules.detenteur_id' )->count();
         $pannes = DPanne::all()->count();
         $todayPanne = DPanne::where('DatePanne', '=', $o)->count();
         $vehicules = Vehicule::count();
-        $chauffeurs = Chauffeur::count();
-        $mecaniciens = Mecanicien::count();
         $piecens = PieceN::count();
         $pns = Panne::count();
         $visites = Visite::count();
@@ -59,10 +52,8 @@ class DashController extends Controller
         ->count('vehicules.id');
 
         return view('dash', [
-            'detenteurs' => $detenteurs,
-            'chauffeurs' => $chauffeurs,
-            'detenteurV' => $detenteurV,
-            'mecaniciens' => $mecaniciens,
+            
+            
             'vehicules' => $vehicules,
             'pns' => $pns,
             'nbE' => $nbE,

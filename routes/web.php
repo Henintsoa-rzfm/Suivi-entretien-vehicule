@@ -57,21 +57,6 @@ Route::delete('/vehicules/{id}', [VehiculeController::class, 'destroy'])->name('
 
 Route::get('/personnels', [PersonnelController::class, 'index'])->name('personnel');
 
-Route::get('/detenteurs', [DetenteurController::class, 'index'])->name('detenteurs');
-Route::get('/detenteurs/create', [DetenteurController::class, 'create'])->name('detenteurs.create');
-Route::post('/detenteurs/create', [DetenteurController::class, 'store'])->name('detenteurs.store');
-Route::get('/detenteurs/{id}', [DetenteurController::class, 'show'])->name('detenteurs.show');
-Route::get('/detenteurs/{id}/edit', [DetenteurController::class, 'edit'])->name('detenteurs.edit');
-Route::patch('/detenteurs/{id}', [DetenteurController::class, 'update'])->name('detenteurs.update');
-Route::delete('/detenteurs/{id}', [DetenteurController::class, 'destroy'])->name('detenteurs.destroy');
-
-Route::get('/chauffeurs', [ChauffeurController::class, 'index'])->name('chauffeurs');
-Route::get('/chauffeurs/create', [ChauffeurController::class, 'create'])->name('chauffeurs.create');
-Route::post('/chauffeurs/create', [ChauffeurController::class, 'store'])->name('chauffeurs.store');
-Route::get('/chauffeurs/{id}', [ChauffeurController::class, 'show'])->name('chauffeurs.show');
-Route::get('/chauffeurs/{id}/edit', [ChauffeurController::class, 'edit'])->name('chauffeurs.edit');
-Route::patch('/chauffeurs/{id}', [ChauffeurController::class, 'update'])->name('chauffeurs.update');
-Route::delete('/chauffeurs/{id}', [ChauffeurController::class, 'destroy'])->name('chauffeurs.destroy');
 
 Route::get('/dpannes', [DPanneController::class, 'index'])->name('dpannes');
 Route::get('/dpannes/create', [DPanneController::class, 'create'])->name('dpannes.create');
@@ -98,14 +83,6 @@ Route::get('/visites/{id}', [VisiteController::class, 'show'])->name('visites.sh
 Route::get('/visites/{id}/edit', [VisiteController::class, 'edit'])->name('visites.edit');
 Route::patch('/visites/{id}', [VisiteController::class, 'update'])->name('visites.update');
 Route::delete('/visites/{id}', [VisiteController::class, 'destroy'])->name('visites.destroy');
-
-Route::get('/mecaniciens', [MecanicienController::class, 'index'])->name('mecaniciens');
-Route::get('/mecaniciens/create', [MecanicienController::class, 'create'])->name('mecaniciens.create');
-Route::post('/mecaniciens/create', [MecanicienController::class, 'store'])->name('mecaniciens.store');
-Route::get('/mecaniciens/{id}', [MecanicienController::class, 'show'])->name('mecaniciens.show');
-Route::get('/mecaniciens/{id}/edit', [MecanicienController::class, 'edit'])->name('mecaniciens.edit');
-Route::patch('/mecaniciens/{id}', [MecanicienController::class, 'update'])->name('mecaniciens.update');
-Route::delete('/mecaniciens/{id}', [MecanicienController::class, 'destroy'])->name('mecaniciens.destroy');
 
 Route::get('/pannes/create', [PanneController::class, 'create'])->name('pannes.create');
 Route::post('/pannes/create', [PanneController::class, 'store'])->name('pannes.store');
