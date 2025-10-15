@@ -11,32 +11,32 @@ class EquipementController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $equipements = Equipement::all();
 
         return view('equipements', [
-            'equipements' => $equipements
+            'equipements' => $equipements,
         ]);
     }
 
     public function create()
-    {        
+    {
         $equipements = Equipement::all();
         $max = Equipement::count('id');
 
-        return view('addequipement',[
+        return view('addequipement', [
             'equipements' => $equipements,
-            'max' => $max
+            'max' => $max,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
             'designation' => 'required',
-            'kilometrageMax' => 'required|numeric'
+            'kilometrageMax' => 'required|numeric',
         ]);
 
         Equipement::create($validateData);
@@ -49,16 +49,16 @@ class EquipementController extends Controller
         $equipement = Equipement::findOrfail($id);
 
         return view('visite', [
-            'equipement' => $equipement
+            'equipement' => $equipement,
         ]);
     }
 
     public function edit($id)
     {
         $equipement = Equipement::findOrfail($id);
-    
+
         return view('editEquipement', [
-            'equipement' => $equipement
+            'equipement' => $equipement,
         ]);
     }
 
@@ -66,10 +66,11 @@ class EquipementController extends Controller
     {
         $validateData = $request->validate([
             'designation' => 'required',
-            'kilometrageMax' => 'required|numeric'
+            'kilometrageMax' => 'required|numeric',
         ]);
 
         Equipement::whereId($id)->update($validateData);
+
         return redirect('/equipements');
     }
 

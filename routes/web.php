@@ -1,26 +1,22 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AssuranceController;
+use App\Http\Controllers\ContenirController;
 use App\Http\Controllers\DashController;
-use App\Http\Controllers\PanneController;
-use App\Http\Controllers\PieceController;
 use App\Http\Controllers\DPanneController;
+use App\Http\Controllers\EquipementController;
+use App\Http\Controllers\IntervenirEntretienController;
+use App\Http\Controllers\InterventionController;
 use App\Http\Controllers\NombreController;
+use App\Http\Controllers\PanneController;
 use App\Http\Controllers\PapierController;
-use App\Http\Controllers\VisiteController;
+use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\PieceController;
 use App\Http\Controllers\PieceNSController;
 use App\Http\Controllers\SpecialController;
-use App\Http\Controllers\ContenirController;
 use App\Http\Controllers\VehiculeController;
-use App\Http\Controllers\AssuranceController;
-use App\Http\Controllers\Personnel\ChauffeurController;
-use App\Http\Controllers\Personnel\DetenteurController;
-use App\Http\Controllers\PersonnelController;
-use App\Http\Controllers\EquipementController;
-use App\Http\Controllers\Personnel\MecanicienController;
-use App\Http\Controllers\InterventionController;
-use App\Http\Controllers\IntervenirEntretienController;
+use App\Http\Controllers\VisiteController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +32,7 @@ use App\Http\Controllers\IntervenirEntretienController;
 Route::get('/', function () {
     return view('auth.login');
 });
-// Route::get('/dashboard', function () {  
+// Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
@@ -56,7 +52,6 @@ Route::patch('/vehicules/{id}', [VehiculeController::class, 'update'])->name('ve
 Route::delete('/vehicules/{id}', [VehiculeController::class, 'destroy'])->name('vehicules.destroy');
 
 Route::get('/personnels', [PersonnelController::class, 'index'])->name('personnel');
-
 
 Route::get('/dpannes', [DPanneController::class, 'index'])->name('dpannes');
 Route::get('/dpannes/create', [DPanneController::class, 'create'])->name('dpannes.create');
@@ -127,6 +122,5 @@ Route::post('/equipements/create', [EquipementController::class, 'store'])->name
 
 Route::get('/piecens/create', [PieceNSController::class, 'create'])->name('piecens.create');
 Route::post('/piecens/create', [PieceNSController::class, 'store'])->name('piecens.store');
-
 
 require __DIR__.'/auth.php';

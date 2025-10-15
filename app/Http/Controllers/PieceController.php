@@ -11,7 +11,7 @@ class PieceController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $pieces = Piece::all();
@@ -19,25 +19,25 @@ class PieceController extends Controller
 
         return view('pieces', [
             'pieces' => $pieces,
-            'nbPi' => $nbPi
+            'nbPi' => $nbPi,
         ]);
     }
 
     public function create()
-    {        
+    {
         $pieces = Piece::all();
         $max = Piece::max('id');
 
-        return view('addpiece',[
+        return view('addpiece', [
             'pieces' => $pieces,
-            'max' => $max
+            'max' => $max,
         ]);
     }
-    
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'Piece' => 'required|unique:pieces,Piece'
+            'Piece' => 'required|unique:pieces,Piece',
         ]);
 
         Piece::create($validateData);
@@ -51,26 +51,27 @@ class PieceController extends Controller
         $piece = Piece::findOrfail($id);
 
         return view('piece', [
-            'piece' => $piece
+            'piece' => $piece,
         ]);
     }
 
     public function edit($id)
     {
         $piece = Piece::findOrfail($id);
-    
+
         return view('editPiece', [
-            'piece' => $piece
+            'piece' => $piece,
         ]);
     }
 
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'Piece' => 'required'
+            'Piece' => 'required',
         ]);
 
         Piece::whereId($id)->update($validateData);
+
         return redirect('/pieces');
     }
 
@@ -81,5 +82,4 @@ class PieceController extends Controller
 
         return redirect('/pieces');
     }
-
 }

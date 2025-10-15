@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Vehicule;
-use App\Models\Intervention;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Panne extends Model
 {
@@ -17,7 +15,7 @@ class Panne extends Model
     {
         return $this->hasOne(Intervention::class);
     }
-    
+
     public function vehicules()
     {
         return $this->belongsToMany(Vehicule::class, 'dpannes');

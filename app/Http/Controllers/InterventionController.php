@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Piece;
-use App\Models\Nombre;
-use App\Models\Vehicule;
-use App\Models\Mecanicien;
 use App\Models\Intervention;
+use App\Models\Nombre;
+use App\Models\Piece;
+use App\Models\Vehicule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,20 +16,20 @@ class InterventionController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $interventions = DB::table('interventions')
-                        ->join('vehicules','interventions.vehicule_id', '=', 'vehicules.id')
-                        ->select('interventions.*', 'vehicules.PlaqueImmatric')
-                        ->orderBy('created_at', 'DESC')
-                        ->get();
-        $intE = DB::table('interventions')->whereIn('Validation',['En attente'])->count();
-        $intV = DB::table('interventions')->whereIn('Validation',['Validée'])->count();
+            ->join('vehicules', 'interventions.vehicule_id', '=', 'vehicules.id')
+            ->select('interventions.*', 'vehicules.PlaqueImmatric')
+            ->orderBy('created_at', 'DESC')
+            ->get();
+        $intE = DB::table('interventions')->whereIn('Validation', ['En attente'])->count();
+        $intV = DB::table('interventions')->whereIn('Validation', ['Validée'])->count();
         $rep = DB::table('interventions')
-                                        ->where('DateLimite','<',now())
-                                        ->where('DateIntervention','<',now())
-                                        ->where('Validation','Validée')->count();
+            ->where('DateLimite', '<', now())
+            ->where('DateIntervention', '<', now())
+            ->where('Validation', 'Validée')->count();
         $vehicules = Vehicule::all();
         $nombres = Nombre::all();
         $pieces = Piece::all();
@@ -46,8 +45,8 @@ class InterventionController extends Controller
             'pieces' => $pieces,
             'intE' => $intE,
             'intV' => $intV,
-            'rep' =>$rep
-            
+            'rep' => $rep,
+
         ]);
     }
 
@@ -59,15 +58,15 @@ class InterventionController extends Controller
         $max = Intervention::max('id');
         $a = Carbon::now();
 
-        return view('addintervention',[
+        return view('addintervention', [
             'interventions' => $interventions,
             'vehicules' => $vehicules,
             'pieces' => $pieces,
             'max' => $max,
-            'a' => $a
-            ]);
+            'a' => $a,
+        ]);
     }
-    
+
     public function store(Request $request)
     {
         // $a = $request->DateIntervention;
@@ -78,25 +77,26 @@ class InterventionController extends Controller
         // {
         //     return $d;
         // }else{
-            $validateData = $request->validate([
-                'nature' => 'required',
-                'DateIntervention' => 'required',
-                'Panne' => 'required',
-                'lieuIntervention' => 'required',
-                'vehicule_id' => 'required',
-                'DateLimite' => 'required',
-                'Validation' => 'required'
-            ]);
-    
-            Intervention::create($validateData);
-            $validateData2 = $request->validate([
-                'piece_id' => 'required',
-                'intervention_id' => 'required',
-                'Nombre' => 'required|numeric'
-            ]);
-    
-            Nombre::create($validateData2);
-            return redirect('/interventions',);
+        $validateData = $request->validate([
+            'nature' => 'required',
+            'DateIntervention' => 'required',
+            'Panne' => 'required',
+            'lieuIntervention' => 'required',
+            'vehicule_id' => 'required',
+            'DateLimite' => 'required',
+            'Validation' => 'required',
+        ]);
+
+        Intervention::create($validateData);
+        $validateData2 = $request->validate([
+            'piece_id' => 'required',
+            'intervention_id' => 'required',
+            'Nombre' => 'required|numeric',
+        ]);
+
+        Nombre::create($validateData2);
+
+        return redirect('/interventions');
         // }
     }
 
@@ -107,7 +107,7 @@ class InterventionController extends Controller
 
         return view('intervention', [
             'intervention' => $intervention,
-            'daty' => $daty
+            'daty' => $daty,
         ]);
     }
 
@@ -117,12 +117,12 @@ class InterventionController extends Controller
         $pieces = Piece::all();
         $vehicules = Vehicule::all();
         $max = Intervention::max('id');
-        
+
         return view('editIntervention', [
             'intervention' => $intervention,
             'vehicules' => $vehicules,
             'max' => $max,
-            'pieces' => $pieces
+            'pieces' => $pieces,
             // 'nombre' => $nombre
         ]);
     }
@@ -145,12 +145,13 @@ class InterventionController extends Controller
             'lieuIntervention' => 'required',
             'vehicule_id' => 'required',
             'DateLimite' => 'required',
-            'Validation' => 'required'
+            'Validation' => 'required',
         ]);
 
         Intervention::whereId($id)->update($validateData);
+
         return redirect('/interventions');
-    // }
+        // }
     }
 
     public function destroy($id)
@@ -160,20 +161,18 @@ class InterventionController extends Controller
 
         return redirect('/interventions');
     }
-
 }
 
-        
         // $intervention_id = $request->intervention_id;
-        // $piece_id = $request->piece_id;
-        // $Nombre = $request->Nombre;
-       
-        // for ($i = 0 ; $i < count($Nombre) ; $i++ ) { 
-        //     $validateData2 = [
-        //         'intervention_id' => $intervention_id[$i],
-        //         'piece_id' => $piece_id[$i],
-        //         'Nombre' => $Nombre[$i]
-        //     ];
-        //     DB::table('nombres')->insert($validateData2);
-        // }
-        // dd($validateData2);
+// $piece_id = $request->piece_id;
+// $Nombre = $request->Nombre;
+
+// for ($i = 0 ; $i < count($Nombre) ; $i++ ) {
+//     $validateData2 = [
+//         'intervention_id' => $intervention_id[$i],
+//         'piece_id' => $piece_id[$i],
+//         'Nombre' => $Nombre[$i]
+//     ];
+//     DB::table('nombres')->insert($validateData2);
+// }
+// dd($validateData2);

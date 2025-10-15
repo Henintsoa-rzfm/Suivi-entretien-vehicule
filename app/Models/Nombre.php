@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Piece;
-use App\Models\Intervention;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Nombre extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['intervention_id','piece_id', 'Nombre'];
+    protected $fillable = ['intervention_id', 'piece_id', 'Nombre'];
 
     public function piece()
     {

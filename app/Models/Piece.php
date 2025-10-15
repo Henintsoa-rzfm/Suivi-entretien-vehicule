@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Nombre;
-use App\Models\Intervention;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Piece extends Model
 {
