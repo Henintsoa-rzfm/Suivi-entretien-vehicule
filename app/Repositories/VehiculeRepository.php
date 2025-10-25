@@ -47,4 +47,9 @@ class VehiculeRepository
     {
         return (int) DB::table('vehicules')->where('Energie', 'Diesel')->count();
     }
+
+    public function getLastVehicleId() : ?int
+    {
+        return DB::table('vehicules')->max('id');
+    }
 }
