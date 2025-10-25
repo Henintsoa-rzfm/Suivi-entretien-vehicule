@@ -22,4 +22,10 @@ class VehiculeService
             'dieselVehiclesCount' => $this->vehiculeRepository->countDieselVehicles(),
         ];
     }
+
+    public function getNextVehicleId() : int
+    {
+        $maxId = $this->vehiculeRepository->getLastVehicleId() ?? 0;
+        return $maxId + 1;
+    }
 }

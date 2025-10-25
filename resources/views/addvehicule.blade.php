@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="row">
-                  <h4 class="card-title text-primary col-md-11">Véhicule numero {{ $max + 1 }}</h4>
+                  <h4 class="card-title text-primary col-md-11">Véhicule numero {{ $max }}</h4>
                   <div class="col-md-1">
                     <button type="submit" class="btn btn-primary btn-circle rounded-circle">
                       <i class="fas fa-check"></i>

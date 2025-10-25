@@ -46,7 +46,7 @@ class VehiculeController extends Controller
         if (! Gate::allows('access-admin')) {
             abort(403);
         }
-        $max = DB::table('vehicules')->max('id');
+        $max = $this->vehiculeService->getNextVehicleId();
 
         return view('addvehicule', [
             'max' => $max,
