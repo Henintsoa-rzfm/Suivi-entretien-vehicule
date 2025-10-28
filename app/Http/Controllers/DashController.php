@@ -10,6 +10,7 @@ use App\Models\Nombre;
 use App\Models\Panne;
 use App\Models\PieceN;
 use App\Models\Visite;
+use App\Repositories\VehiculeRepository;
 use App\Services\VehiculeService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +66,21 @@ class DashController extends Controller
             'panneMve' => $panneMve,
             'alertVehiclesCount' => $stats['alertVehiclesCount'],
             'intE' => $intE,
+        ]);
+
+    }
+    
+    public function dashV2(VehiculeRepository $vehiculeRepository)
+    {
+        $stats = $this->vehiculeService->getDashboardStats();
+        $vehicules = $vehiculeRepository->getAllVehicles();
+
+        return view('dash-v2',[
+            'vehicles' => $vehicules,
+            'vehiclesCount' => $stats['vehiclesCount'],
+            'alertVehiclesCount' => $stats['alertVehiclesCount'],
+            'essenceVehiclesCount' => $stats['essenceVehiclesCount'],
+            'dieselVehiclesCount' => $stats['dieselVehiclesCount'],
         ]);
     }
 }
