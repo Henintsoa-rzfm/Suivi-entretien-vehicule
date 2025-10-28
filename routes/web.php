@@ -39,6 +39,9 @@ Route::get('/', function () {
 Route::get('/dash', [DashController::class, 'index'])
     ->middleware('auth')
     ->name('dash');
+Route::get('/dash-v2', [DashController::class, 'dashV2'])
+    ->middleware('auth')
+    ->name('dashV2');
 // Route::get('/dash', [DashController::class, 'index'])->name('dash');
 
 // Route::get('/special', [SpecialController::class, 'index'])->name('special');

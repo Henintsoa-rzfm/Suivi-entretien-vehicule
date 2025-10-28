@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Vehicle\StoreVehicleRequest;
+use App\Http\Requests\Vehicle\UpdateVehicleRequest;
 use App\Models\Contenir;
 use App\Models\Vehicule;
 use App\Repositories\VehiculeRepository;
 use App\Services\VehiculeService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class VehiculeController extends Controller
@@ -53,30 +53,11 @@ class VehiculeController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreVehicleRequest $request)
     {
-        $a = $request->DateEntree;
-        $b = $request->AnneeMenCirc;
-        $c = Carbon::now();
-
-        if ($a > $c || $b > $c) {
-            return '<h3 class="alert alert-danger" style="text-align : center; margin-top: 250px" >La date d\'entrée ou la mise en circulation à verifier</h3>';
-        } else {
-            $validateData = $request->validate([
-                'PlaqueImmatric' => 'required|max:10',
-                'Vehicule' => 'required',
-                'Energie' => 'required',
-                'Consommation' => 'required|numeric',
-                'CV' => 'required|numeric',
-                'AnneeMenCirc' => 'required',
-                'DateEntree' => 'required',
-                'KMActuel' => 'required|numeric',
-            ]);
-
-            Vehicule::create($validateData);
+            Vehicule::create($request->validated());
 
             return redirect('/vehicules');
-        }
     }
 
     public function show($id)
@@ -99,31 +80,12 @@ class VehiculeController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateVehicleRequest $request, $id)
     {
-        $a = $request->DateEntree;
-        $b = $request->AnneeMenCirc;
-        $c = Carbon::now();
-
-        if ($a > $c || $b > $c) {
-            return '<h3 class="alert alert-danger" style="text-align : center; margin-top: 250px" >La date d\'entrée ou la mise en circulation à verifier</h3>';
-        } else {
-            $validateData = $request->validate([
-                'PlaqueImmatric' => 'required|max:10',
-                'Vehicule' => 'required',
-                'Energie' => 'required',
-                'Consommation' => 'required|numeric',
-                'CV' => 'required|numeric',
-                'AnneeMenCirc' => 'required',
-                'DateEntree' => 'required',
-                'KMActuel' => 'required|numeric',
-            ]);
-
+            $validateData = $request->validated();
             Vehicule::whereId($id)->update($validateData);
 
-            // dd($validateData);
             return redirect('/vehicules');
-        }
     }
 
     public function destroy($id)
