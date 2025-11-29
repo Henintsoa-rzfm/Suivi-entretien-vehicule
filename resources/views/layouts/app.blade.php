@@ -33,10 +33,6 @@
 
     @yield('content')
 
-    <section class="card">
-      <div class="muted" style="margin-bottom:8px;">Interventions sur 30 jours</div>
-      <canvas id="chart"></canvas>
-    </section>
   </main>
 
 <script>

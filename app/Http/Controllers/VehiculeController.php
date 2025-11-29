@@ -36,6 +36,8 @@ class VehiculeController extends Controller
             'alertVehiclesCount' => $stats['alertVehiclesCount'],
             'essenceVehiclesCount' => $stats['essenceVehiclesCount'],
             'dieselVehiclesCount' => $stats['dieselVehiclesCount'],
+            'dieselVehiclePercentage' => $stats['dieselVehiclePercentage'],
+            'essenceVehiclePercentage' => $stats['essenceVehiclePercentage'],
             'user' => $user,
             'eq' => $eq,
         ]);

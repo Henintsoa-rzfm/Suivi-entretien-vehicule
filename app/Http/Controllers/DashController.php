@@ -69,18 +69,6 @@ class DashController extends Controller
         ]);
 
     }
-    
-    public function dashV2(VehiculeRepository $vehiculeRepository)
-    {
-        $stats = $this->vehiculeService->getDashboardStats();
-        $vehicules = $vehiculeRepository->getAllVehicles();
 
-        return view('dash-v2',[
-            'vehicles' => $vehicules,
-            'vehiclesCount' => $stats['vehiclesCount'],
-            'alertVehiclesCount' => $stats['alertVehiclesCount'],
-            'essenceVehiclesCount' => $stats['essenceVehiclesCount'],
-            'dieselVehiclesCount' => $stats['dieselVehiclesCount'],
-        ]);
-    }
+
 }
