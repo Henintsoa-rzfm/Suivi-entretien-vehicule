@@ -30,7 +30,7 @@ class VehiculeController extends Controller
         $stats = $this->vehiculeService->getDashboardStats();
         $eq = Contenir::count();
 
-        return view('vehicules', [
+        return view('feature.vehicle.vehicle-information.vehicules', [
             'vehicules' => $vehicules,
             'vehiclesCount' => $stats['vehiclesCount'],
             'alertVehiclesCount' => $stats['alertVehiclesCount'],
@@ -48,7 +48,7 @@ class VehiculeController extends Controller
         }
         $max = $this->vehiculeService->getNextVehicleId();
 
-        return view('addvehicule', [
+        return view('feature.vehicle.vehicle-information.create', [
             'max' => $max,
         ]);
     }
@@ -65,7 +65,7 @@ class VehiculeController extends Controller
         $vehicule = Vehicule::findOrfail($id);
         $date1 = Carbon::now();
 
-        return view('vehicule', [
+        return view('feature.vehicle.vehicle-information.vehicule', [
             'vehicule' => $vehicule,
             'date1' => $date1,
         ]);
@@ -75,7 +75,7 @@ class VehiculeController extends Controller
     {
         $vehicule = Vehicule::findOrfail($id);
 
-        return view('editVehicule', [
+        return view('feature.vehicle.vehicle-information.edit', [
             'vehicule' => $vehicule,
         ]);
     }
