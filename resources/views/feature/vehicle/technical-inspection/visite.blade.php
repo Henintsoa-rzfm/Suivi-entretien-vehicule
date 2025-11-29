@@ -9,33 +9,21 @@
         .masary{width: 100px; height:auto}
         .Masary{width: 150px; height:auto}
         </style>
-    <div class="container">    
+    <div class="container">
         <section style="position: relative">
-            <div class="blo">
-                <img src="{{asset('images/index.JPG')}}" alt="" class="masary">
-            </div>
-            <div class="bli">
-                <img src="{{asset('images/rep.JPG')}}" alt="" class="Masary">
-            </div>
-            <div class="bla">
-                <img src="{{asset('images/LogoDST.png')}}" alt="" class="masary">
-            </div>
-            
             <div style="position: fixed; top:200px; left:600px;opacity:0.06;">
                 <img src="{{asset('images/az.jpg')}}" alt="">
-            </div>    
-        </section><br><br>
-        
+            </div>
+        </section>
+
     <h3 class="text-center">Fiche de visite  numero {{$visite->id}}</h3>
     <br><br>
     <div style="border: 1px solid black; padding:10px; display:flex; justify-content:space-around">
         <div class="bli">
             <p>Immatriculation : {{$visite->Vehicule->PlaqueImmatric}}</p>
             <p>Vehicule : {{$visite->Vehicule->Vehicule}}</p>
-            <p>Detenteur : {{$visite->Vehicule->Detenteur->Detenteur}}</p>
         </div>
         <div class="blo">
-            <p>Chauffeur : {{$visite->Vehicule->Chauffeur->Chauffeur}}</p>    
             <p>Puissance : {{$visite->Vehicule->CV}} ch</p>
             <p>Consommation : {{$visite->Vehicule->Consommation}} L/100</p>
         </div>
@@ -53,7 +41,7 @@
         <th>Date d'expiration de la visite</th>
         <th>Etat</th>
     </thead>
-    <tbody class="text-dark">    
+    <tbody class="text-dark">
         <td> {{date('d M Y', strtotime($visite->DateVisite))}}</td>
         <td> {{date('d M Y', strtotime($visite->Date_exp_Visite))}}</td>
         <td>
@@ -64,12 +52,12 @@
             <span class="badge badge-danger">Expirée</span>
         @endif
         @if($andro < $visite->Date_exp_Visite AND $andro < \Carbon\Carbon::parse($visite->Date_exp_Visite)->subDays(15))
-            <span class="badge badge-primary">Expirée le {{date('d M Y', strtotime($visite->Date_exp_Visite))}}</span>                              
+            <span class="badge badge-primary">Expirée le {{date('d M Y', strtotime($visite->Date_exp_Visite))}}</span>
         @endif
         </td>
 
     </tbody>
-</table>            
+</table>
 </div>
 </body>
 
