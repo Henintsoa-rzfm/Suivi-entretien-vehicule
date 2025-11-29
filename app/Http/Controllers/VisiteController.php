@@ -27,7 +27,7 @@ class VisiteController extends Controller
         $lim = Carbon::now()->subDays(15);
         $nbV = Vehicule::count();
 
-        return view('visites', [
+        return view('feature.vehicle.technical-inspection.visites', [
             'visites' => $visites,
             'max' => $max,
             'andro' => $andro,
@@ -44,7 +44,7 @@ class VisiteController extends Controller
         $vehicules = Vehicule::all();
         $max = Visite::count('id');
 
-        return view('addvisite', [
+        return view('feature.vehicle.technical-inspection.create', [
             'visites' => $visites,
             'vehicules' => $vehicules,
             'max' => $max,
@@ -76,7 +76,7 @@ class VisiteController extends Controller
         $visite = Visite::findOrfail($id);
         $andro = Carbon::now();
 
-        return view('visite', [
+        return view('feature.vehicle.technical-inspection.visite', [
             'visite' => $visite,
             'andro' => $andro,
         ]);
@@ -87,7 +87,7 @@ class VisiteController extends Controller
         $visite = Visite::findOrfail($id);
         $vehicules = Vehicule::all();
 
-        return view('editVisite', [
+        return view('feature.vehicle.technical-inspection.edit', [
             'visite' => $visite,
             'vehicules' => $vehicules,
         ]);
