@@ -36,12 +36,12 @@
       <div class="card">
         <div class="muted">Véhicules essence</div>
         <div class="value">{{$essenceVehiclesCount}}</div>
-        <div class="muted">{{$essenceVehiclesCount*100/$vehiclesCount}} %</div>
+        <div class="muted">{{$essenceVehiclePercentage}} %</div>
       </div>
       <div class="card">
         <div class="muted">Véhicules diesel</div>
         <div class="value">{{$dieselVehiclesCount}}</div>
-        <div class="muted">{{$dieselVehiclesCount*100/$vehiclesCount}} %</div>
+        <div class="muted">{{$dieselVehiclePercentage}} %</div>
       </div>
     </section>
     <br>

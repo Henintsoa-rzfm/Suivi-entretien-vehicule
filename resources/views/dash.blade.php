@@ -1,10 +1,16 @@
 @extends('layouts.app')
-@section('content')   
+@section('content')
 <br>
 <style>
 .ton{font-weight: bold}
 </style>
 <div class="container text-dark" style="position: relative">
+
+    <section class="card">
+      <div class="muted" style="margin-bottom:8px;">Interventions sur 30 jours</div>
+      <canvas id="chart"></canvas>
+    </section>
+
     <div class="row">
       <section class="container">
         <div class="row">
@@ -117,7 +123,7 @@
                                 @else
                                     0
                                 @endif
-                            
+
                               </h3>
                               <p class="text-primary ml-2 mb-0 font-weight-medium"></p>
                             </div>
@@ -144,7 +150,7 @@
                                 @else
                                     0
                                 @endif
-                            
+
                               </h3>
                               <p class="text-success ml-2 mb-0 font-weight-medium"></p>
                             </div>
@@ -216,7 +222,7 @@
                     </div>
                   </div>
                 </div>
-          
+
 
           <div class="row">
             <div class="col-12">
@@ -244,11 +250,11 @@
                               </td>
                               <td>Nombre des détenteurs</td>
                               <td class="text-right">
-                                
+
                                     0
                                 </td>
-                              <td class="text-right font-weight-medium"> 
-                                
+                              <td class="text-right font-weight-medium">
+
                               </td>
                             </tr>
                             <tr>
@@ -256,11 +262,11 @@
                                 <i class="fas fa-user"></i>
                               </td>
                               <td>Nombres des Chauffeurs</td>
-                              <td class="text-right">  
+                              <td class="text-right">
                                     0
                               </td>
                               <td class="text-right font-weight-medium">
-                                
+
                               </td>
                             </tr>
                             <tr>
@@ -269,10 +275,10 @@
                               </td>
                               <td>Nombre des mécaniciens</td>
                               <td class="text-right">
-                                
+
                               </td>
                               <td class="text-right font-weight-medium">
-                                
+
                               </td>
                             </tr>
                           </tbody>
@@ -345,17 +351,17 @@
             </div>
           </div>
         </div>
-    
+
 
 
       </section><br>
   </div>
   <br>
-    
+
   </div>
 
 
-<style> 
+<style>
   .card1 img{height: 195px;}
   .ity{margin: auto}
     .card1 {
@@ -366,12 +372,12 @@
       margin: auto
       /* margin-right: 25px; */
     }
-  
+
     /* On mouse-over, add a deeper shadow */
     .card1:hover {
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
-  
+
     /* Add some padding inside the card container */
     .container {
       padding: 2px 16px;
@@ -381,7 +387,7 @@
   transition: 0.3s;
   border-radius: 5px; /* 5px rounded corners */
   }
-  
+
   /* Add rounded corners to the top left and the top right corner of the image */
   img {
   border-radius: 5px 5px 0 0;

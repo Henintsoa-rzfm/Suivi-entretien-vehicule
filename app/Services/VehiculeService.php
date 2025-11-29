@@ -15,17 +15,26 @@ class VehiculeService
 
     public function getDashboardStats(): array
     {
+        $vehiclesCount = $this->vehiculeRepository->countVehicles();
+        $dieselVehicleCount = $this->vehiculeRepository->countDieselVehicles();
+        $essenceVehicleCount = $this->vehiculeRepository->countEssenceVehicles();
+
         return [
-            'vehiclesCount' => $this->vehiculeRepository->countVehicles(),
+            'vehiclesCount' => $vehiclesCount,
             'alertVehiclesCount' => $this->vehiculeRepository->countAlertVehicles(),
             'essenceVehiclesCount' => $this->vehiculeRepository->countEssenceVehicles(),
-            'dieselVehiclesCount' => $this->vehiculeRepository->countDieselVehicles(),
+            'dieselVehiclesCount' => $dieselVehicleCount,
+            'dieselVehiclePercentage' => $vehiclesCount > 0 ?
+                round($dieselVehicleCount*100/$vehiclesCount, 2) : 0,
+            'essenceVehiclePercentage' => $vehiclesCount > 0 ?
+                round($essenceVehicleCount*100/$vehiclesCount, 2) : 0
         ];
     }
 
     public function getNextVehicleId() : int
     {
         $maxId = $this->vehiculeRepository->getLastVehicleId() ?? 0;
-        return $maxId + 1;
+        return (int) $maxId + 1;
     }
+
 }
