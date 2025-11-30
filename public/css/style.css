@@ -41,7 +41,13 @@
     display:flex;
     flex-direction:column;
   }
-  .brand{font-weight:700; font-size:18px; color:var(--accent); margin-bottom:20px; letter-spacing:-0.3px;}
+  .brand{
+    font-weight:700;
+    font-size:18px;
+    color:var(--accent);
+    margin-bottom:20px;
+    letter-spacing:-0.3px;
+}
   nav{display:flex; flex-direction:column; gap:8px;}
   nav a{
     text-decoration:none;

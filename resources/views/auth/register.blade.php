@@ -8,9 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
 <body>
 <div class="wrapper">
-    <div class="logo"> <img src="images/LogoDST.png" alt=""> </div> 
-    <div class="text-center mt-4 name"> D S T </div>
-    
+
         <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <form method="POST" action="{{ route('register') }}" class="p-3 mt-3">
@@ -20,24 +18,24 @@
           <div class="alert alert-danger" style="color: black">{{ $error }}</div>
         @endforeach
       @endif
-        <div class="form-field d-flex align-items-center"> 
-            <span class="far fa-user"></span> 
-            <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"  placeholder="Nom Utilisateur"> 
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"  placeholder="Nom Utilisateur">
         </div>
-        <div class="form-field d-flex align-items-center"> 
-            <span class="far fa-user"></span> 
-            <input id="email" class="block mt-1 w-full" type="emeail" name="email" :value="old('email')"  placeholder="Email"> 
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input id="email" class="block mt-1 w-full" type="emeail" name="email" :value="old('email')"  placeholder="Email">
         </div>
-        <div class="form-field d-flex align-items-center"> 
-            <span class="fas fa-key"></span> 
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
             <input id="password" class="block mt-1 w-full"
-            type="password" name="password" type="password"  placeholder="Mot de passe"> 
-        </div> 
-        <div class="form-field d-flex align-items-center"> 
-            <span class="fas fa-key"></span> 
+            type="password" name="password" type="password"  placeholder="Mot de passe">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
             <input id="password" class="block mt-1 w-full"
-            type="password" name="password_confirmation" type="password"  placeholder="Confirmation du Mot de passe"> 
-        </div> 
+            type="password" name="password_confirmation" type="password"  placeholder="Confirmation du Mot de passe">
+        </div>
         <button type="submit" class="btn mt-3 bg-dark">{{ __('S\'inscrire') }}</button>
     </form>
     <div class="text-center fs-6"><a href="{{route('login')}}">J'ai déjà un compte</a> </div>
@@ -58,7 +56,7 @@
 
 
 
-{{-- 
+{{--
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
