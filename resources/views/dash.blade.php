@@ -1,10 +1,49 @@
 @extends('layouts.app')
 @section('content')
-<br>
-<style>
-.ton{font-weight: bold}
-</style>
+
 <div class="container text-dark" style="position: relative">
+    <header class="topbar">
+        <h2 style="font-size:18px; font-weight:600;"> Bienvenue dans <span>FiaraTrack</span></h2>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+        </form>
+    </header>
+    <br>
+
+    <section class="grid">
+        <div class="card">
+        <div class="muted">Nombre de véhicule</div>
+        <div class="value">{{$vehicules}}</div>
+        <div class="muted">+4% vs semaine dernière</div>
+        </div>
+        <div class="card">
+        <div class="muted">Véhicules essence</div>
+        <div class="value">-</div>
+        <div class="muted">7 %</div>
+        </div>
+        <div class="card">
+        <div class="muted">Véhicules diesel</div>
+        <div class="value">1</div>
+        <div class="muted">2 %</div>
+        </div>
+        <div class="card">
+        <div class="muted">Nombre de véhicule</div>
+        <div class="value">{{$vehicules}}</div>
+        <div class="muted">+4% vs semaine dernière</div>
+        </div>
+        <div class="card">
+        <div class="muted">Véhicules essence</div>
+        <div class="value">-</div>
+        <div class="muted">7 %</div>
+        </div>
+        <div class="card">
+        <div class="muted">Véhicules diesel</div>
+        <div class="value">1</div>
+        <div class="muted">2 %</div>
+        </div>
+    </section>
+    <br>
 
     <section class="card">
       <div class="muted" style="margin-bottom:8px;">Interventions sur 30 jours</div>
