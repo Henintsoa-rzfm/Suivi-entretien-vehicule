@@ -6,13 +6,13 @@
         🔍 <input placeholder="Rechercher...">
     </div>
     <div class="actions">
-        <button class="btn">
-            @if(Auth::user()->admin)
+        @can('create', \App\Models\Vehicule::class)
+            <button class="btn">
                 <a class="btn" href="{{ route('vehicules.create') }}">
                     + Nouvelle voiture
                 </a>
-            @endif
-        </button>
+            </button>
+        @endcan
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="btn"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>

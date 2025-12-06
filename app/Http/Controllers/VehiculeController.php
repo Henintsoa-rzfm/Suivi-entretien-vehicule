@@ -24,6 +24,7 @@ class VehiculeController extends Controller
 
     public function index(VehiculeRepository $vehiculesRepository)
     {
+        // $this->authorize('viewAny', Vehicule::class);
         $vehicules = $vehiculesRepository->getAllVehicles();
 
         $user = Auth::user();
@@ -45,9 +46,7 @@ class VehiculeController extends Controller
 
     public function create()
     {
-        if (! Gate::allows('access-admin')) {
-            abort(403);
-        }
+        $this->authorize('create', Vehicule::class);
         $max = $this->vehiculeService->getNextVehicleId();
 
         return view('feature.vehicle.vehicle-information.create', [
