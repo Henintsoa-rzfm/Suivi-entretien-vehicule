@@ -1,10 +1,15 @@
 @extends('layouts.app')
 @section('content')
 <body id="totalite" class="bg-dark text-dark" style="background: /*#F2F7FD*/">
+    <header class="topbar">
+        <h2 style="font-size:18px; font-weight:600;">➕ Ajouter un véhicule</h2>
+        <a href="{{ route('principal')}}">
+            <button class="btn">⬅ Retour</button>
+        </a>
+    </header>
     <br>
+
     <div  class="container bg-light bloc" style="align-content: center!important">
-      <h2 style="font-weight: bold" class="text-center">Ajouter un nouveau véhicule</h2>
-<br>
 
         <div id="afeno" class="col-12 grid-margin bg bg-light text-dark">
           <div class="card" style="box-shadow: 5px 8px 7px 0 rgba(0,0,0,0.2); border:none">
@@ -16,7 +21,7 @@
                     <div class="alert alert-danger" style="color: black">{{ $error }}</div>
                   @endforeach
                 @endif
-                
+
                 <div class="row">
                   <h4 class="card-title text-primary col-md-11">Véhicule numero {{ $max }}</h4>
                   <div class="col-md-1">
@@ -90,9 +95,9 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="row">
-                
+
                   <div class="col-md-6">
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Mise en circulation</label>
@@ -109,9 +114,9 @@
                       </div>
                     </div>
                   </div>
-                  
+
                 </div>
-                
+
               </form>
             </div>
           </div>

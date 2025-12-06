@@ -13,6 +13,11 @@
 <form method="POST" action="{{ route('login') }}" id="vehicleForm" class="form">
     <h1 class="brand">FiaraTrack</h1>
     @csrf
+        @if($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" style="color: black">{{ $error }}</div>
+        @endforeach
+    @endif
     <div class="form-group">
         <input type="text" name="email" :value="old('email')"  id="userName" placeholder="Utilisateur : email@email.com" required>
     </div>

@@ -28,22 +28,22 @@
 <br>
 
 <section class="grid">
-      <div class="card">
-        <div class="muted">Nombre de véhicule</div>
-        <div class="value">{{$vehiclesCount}}</div>
-        <div class="muted">+4% vs semaine dernière</div>
-      </div>
-      <div class="card">
-        <div class="muted">Véhicules essence</div>
-        <div class="value">{{$essenceVehiclesCount}}</div>
-        <div class="muted">{{$essenceVehiclePercentage}} %</div>
-      </div>
-      <div class="card">
-        <div class="muted">Véhicules diesel</div>
-        <div class="value">{{$dieselVehiclesCount}}</div>
-        <div class="muted">{{$dieselVehiclePercentage}} %</div>
-      </div>
-    </section>
+    <div class="card">
+    <div class="muted">Nombre de véhicule</div>
+    <div class="value">{{$vehiclesCount}}</div>
+    <div class="muted">+4% vs semaine dernière</div>
+    </div>
+    <div class="card">
+    <div class="muted">Véhicules essence</div>
+    <div class="value">{{$essenceVehiclesCount}}</div>
+    <div class="muted">{{$essenceVehiclePercentage}} %</div>
+    </div>
+    <div class="card">
+    <div class="muted">Véhicules diesel</div>
+    <div class="value">{{$dieselVehiclesCount}}</div>
+    <div class="muted">{{$dieselVehiclePercentage}} %</div>
+    </div>
+</section>
     <br>
 
 <div class="card shadow-sm border-0">
