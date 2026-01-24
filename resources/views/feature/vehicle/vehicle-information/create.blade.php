@@ -1,11 +1,14 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="{{asset('css/create.css')}}">
 <body id="totalite" class="bg-dark text-dark" style="background: /*#F2F7FD*/">
     <header class="topbar">
         <h2 style="font-size:18px; font-weight:600;">➕ Ajouter un véhicule</h2>
-        <a href="{{ route('principal')}}">
-            <button class="btn">⬅ Retour</button>
-        </a>
+        <div class="actions">
+            <a href="{{ route('principal')}}">
+                <button class="btn">⬅ Retour</button>
+            </a>
+        </div>
     </header>
     <br>
 
@@ -24,11 +27,9 @@
 
                 <div class="row">
                   <h4 class="card-title text-primary col-md-11">Véhicule numero {{ $max }}</h4>
-                  <div class="col-md-1">
-                    <button type="submit" class="btn btn-primary btn-circle rounded-circle">
-                      <i class="fas fa-check"></i>
+                    <button type="submit" class="btn">
+                        Enregistrer
                     </button>
-                  </div>
                 </div>
                 <br>
                 <div class="row">
@@ -39,13 +40,6 @@
                         <input type="text" style="box-shadow: 2px 4px 8px 0 rgba(148, 116, 116, 0.2); border:none" class="form-control rounded bg-light text-dark" placeholder="ex : 3421 TAE" name="PlaqueImmatric"/>
                       </div>
                     </div>
-                    <script>
-                            $(document).ready(function(){
-                            $("#ch").inputmask("999999");
-                            $("#det").inputmask("999999");
-                            $("#mec").inputmask("999999");
-                          });
-                    </script>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group row">
