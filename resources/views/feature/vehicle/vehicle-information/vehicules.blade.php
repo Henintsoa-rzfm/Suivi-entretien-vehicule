@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{asset('css/pagination.css')}}">
 <header class="topbar">
     <div class="search">
         🔍 <input placeholder="Rechercher...">
@@ -48,7 +49,6 @@
 
 <div class="card shadow-sm border-0">
     <div class="card-body p-0">
-        <div class="muted" style="margin-bottom:8px;">Dernières interventions</div>
         <table class="table table-hover text-center align-middle mb-0">
             <thead class="table-light text-uppercase">
                 <tr>
@@ -73,6 +73,15 @@
                 @endforeach
             </tbody>
         </table>
+
+        {{-- Pagination alignée au centre --}}
+        <div class="d-flex justify-content-center mt-3">
+            {{ $vehicules->links('pagination::bootstrap-5') }}
+        </div>
+
+    </div>
+</div>
+
     </div>
 </div>
 
