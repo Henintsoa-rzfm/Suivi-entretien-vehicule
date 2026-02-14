@@ -1,9 +1,84 @@
-input{
-    width: 200px;
-    height: 20px;
-    border-radius: 10%;
+/* ===== CENTRAGE DU FORMULAIRE ===== */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* centre les colonnes */
 }
 
-input:focus{
-    border-color: white;
+/* Chaque colonne prend max 50%, flexible */
+.col-md-6 {
+    flex: 1 1 45%; /* flexible, minimum 45%, prend l'espace disponible */
+    max-width: 45%;
+    display: flex;
+    flex-direction: column; /* label + input vertical */
+    align-items: flex-start;
+}
+
+/* ===== LABEL + INPUT ===== */
+.form-group.row {
+    display: flex;
+    flex-direction: column; /* label au-dessus */
+    gap: 6px;               /* espace label -> input */
+    width: 100%;
+    margin-bottom: 16px;    /* espace entre chaque champ du formulaire */
+}
+
+/* Label */
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* Input container */
+.form-group .col-sm-9 {
+    display: flex;
+    width: 100%;
+}
+
+/* ===== INPUTS ===== */
+.form-control,
+select {
+    width: 100%;          /* prend tout l’espace disponible de la colonne */
+    height: 42px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc !important;
+    box-shadow: none !important;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: 0.2s ease;
+    margin-bottom: 0;      /* déjà géré par .form-group */
+}
+
+/* Focus propre */
+.form-control:focus,
+select:focus {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 2px rgba(13,110,253,0.15) !important;
+}
+
+/* Placeholder plus clair */
+.form-control::placeholder,
+select::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* Optionnelle : padding dropdown pour select */
+select {
+    padding-right: 30px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .form-control,
+    select {
+        max-width: 100%;
+    }
 }
