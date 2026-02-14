@@ -1,0 +1,58 @@
+/* Container de pagination */
+.pagination {
+    display: flex;
+    justify-content: center; /* Centrer la pagination */
+    margin-top: 1rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+/* Chaque numéro de page */
+.pagination .page-item {
+    margin: 0 3px; /* espacement entre les numéros */
+}
+
+/* Liens de page */
+.pagination .page-link {
+    color: #0d6efd; /* couleur texte bleu comme Bootstrap */
+    background-color: #f8f9fa; /* fond clair */
+    border: 1px solid #dee2e6; /* bordure fine */
+    padding: 6px 12px;
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px; /* coins légèrement arrondis */
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover */
+.pagination .page-link:hover {
+    background-color: #e2e6ea;
+    color: #0a58ca;
+}
+
+/* Page active */
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+    font-weight: bold;
+}
+
+/* Boutons précédents/suivants masqués */
+.pagination .page-item:first-child,
+.pagination .page-item:last-child {
+    display: none;
+}
+
+/* Boutons désactivés */
+.pagination .page-item.disabled .page-link {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border-color: #dee2e6;
+    pointer-events: none;
+}

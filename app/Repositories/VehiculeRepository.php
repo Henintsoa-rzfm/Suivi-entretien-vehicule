@@ -3,7 +3,10 @@
 namespace App\Repositories;
 
 use App\Models\Vehicule;
-use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+// use Illuminate\Pagination\LengthAwarePaginator;
+// use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 
 class VehiculeRepository
@@ -15,12 +18,13 @@ class VehiculeRepository
         $this->vehicules = $vehicules;
     }
 
-    public function getAllVehicles(): Collection
+    public function getAllVehicles(): LengthAwarePaginator
     {
         return DB::table('vehicules')
             ->select('vehicules.*')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(4);
+
     }
 
     public function countAlertVehicles(): int
