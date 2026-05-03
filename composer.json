@@ -5,10 +5,10 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "doctrine/dbal": "^3.3",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^11.51.0",
+        "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8"
     },
@@ -19,9 +19,8 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "myclabs/deep-copy": "^1.13.4",
-        "nunomaduro/collision": "^8.0.0",
-        "phpunit/php-code-coverage": "^10.1.0",
-        "phpunit/phpunit": "^10.5.62"
+        "nunomaduro/collision": "^8.5.0",
+        "phpunit/phpunit": "^11.5.50"
     },
     "autoload": {
         "psr-4": {
