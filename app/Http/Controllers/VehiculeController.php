@@ -28,7 +28,7 @@ class VehiculeController extends Controller
 
         $user = Auth::user();
         $stats = $this->vehiculeService->getDashboardStats();
-        $eq = Contenir::count();
+        // $eq = Contenir::count();
 
         return view('feature.vehicle.vehicle-information.vehicules', [
             'vehicules' => $vehicules,
@@ -39,7 +39,7 @@ class VehiculeController extends Controller
             'dieselVehiclePercentage' => $stats['dieselVehiclePercentage'],
             'essenceVehiclePercentage' => $stats['essenceVehiclePercentage'],
             'user' => $user,
-            'eq' => $eq,
+            // 'eq' => $eq,
         ]);
     }
 
