@@ -24,11 +24,11 @@ class UpdateVehicleRequest extends FormRequest
         return [
             'PlaqueImmatric' => 'required|max:10',
             'Vehicule' => 'required',
-            'Energie' => 'required',
+            'Energie' => 'required|in:Essence,Diesel',
             'Consommation' => 'required|numeric',
             'CV' => 'required|numeric',
             'AnneeMenCirc' => 'required|before_or_equal:today',
-            'DateEntree' => 'required|before_or_equal:today',
+            'DateEntree' => 'required|after_or_equal:AnneeMenCirc|before_or_equal:today',
             'KMActuel' => 'required|numeric',
         ];
     }

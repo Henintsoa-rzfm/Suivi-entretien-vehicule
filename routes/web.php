@@ -32,9 +32,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 Route::get('/dash', [DashController::class, 'index'])
     ->middleware('auth')
@@ -42,9 +39,6 @@ Route::get('/dash', [DashController::class, 'index'])
 Route::get('/dash-v2', [DashController::class, 'dashV2'])
     ->middleware('auth')
     ->name('dashV2');
-// Route::get('/dash', [DashController::class, 'index'])->name('dash');
-
-// Route::get('/special', [SpecialController::class, 'index'])->name('special');
 
 Route::get('/vehicules', [VehiculeController::class, 'index'])->name('principal');
 Route::get('/vehicules/create', [VehiculeController::class, 'create'])->name('vehicules.create');
