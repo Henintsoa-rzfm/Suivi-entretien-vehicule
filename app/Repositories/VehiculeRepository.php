@@ -4,9 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Vehicule;
 use Illuminate\Pagination\LengthAwarePaginator;
-// use Illuminate\Pagination\LengthAwarePaginator;
-// use Illuminate\Support\Collection;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 
 class VehiculeRepository
