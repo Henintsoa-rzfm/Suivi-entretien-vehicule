@@ -17,4 +17,3 @@ class PieceNS extends Model
     }
 }
 
-}

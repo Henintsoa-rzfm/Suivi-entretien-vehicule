@@ -10,7 +10,6 @@ use App\Repositories\VehiculeRepository;
 use App\Services\VehiculeService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class VehiculeController extends Controller
 {
