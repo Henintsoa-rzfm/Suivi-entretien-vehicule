@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Vehicle\StoreVehicleRequest;
 use App\Http\Requests\Vehicle\UpdateVehicleRequest;
-use App\Models\Contenir;
+// use App\Models\Contenir;
 use App\Models\Vehicule;
 use App\Repositories\VehiculeRepository;
 use App\Services\VehiculeService;
