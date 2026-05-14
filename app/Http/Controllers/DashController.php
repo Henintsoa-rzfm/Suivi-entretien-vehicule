@@ -10,7 +10,6 @@ use App\Models\Nombre;
 use App\Models\Panne;
 use App\Models\PieceN;
 use App\Models\Visite;
-use App\Repositories\VehiculeRepository;
 use App\Services\VehiculeService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -46,10 +45,10 @@ class DashController extends Controller
         $entretiens = Equipement::count();
         $nombres = Nombre::count();
         $intE = DB::table('interventions')->whereIn('Validation', ['En attente'])->count();
-        $stats = $this->vehiculeService->getDashboardStats();
+        // $stats = $this->vehiculeService->getDashboardStats();
 
         return view('dash', [
-            'vehicules' => $stats['vehiclesCount'],
+            ...$this->vehiculeService->getDashboardStats(),
             'pns' => $pns,
             'pannes' => $pannes,
             'andro' => $andro,
@@ -64,7 +63,7 @@ class DashController extends Controller
             'user' => $user,
             'mverina' => $mverina,
             'panneMve' => $panneMve,
-            'alertVehiclesCount' => $stats['alertVehiclesCount'],
+            // 'alertVehiclesCount' => $stats['alertVehiclesCount'],
             'intE' => $intE,
         ]);
 

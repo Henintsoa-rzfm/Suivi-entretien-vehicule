@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Vehicle\StoreVehicleRequest;
 use App\Http\Requests\Vehicle\UpdateVehicleRequest;
-// use App\Models\Contenir;
 use App\Models\Vehicule;
-use App\Repositories\VehiculeRepository;
 use App\Services\VehiculeService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -21,25 +19,12 @@ class VehiculeController extends Controller
         $this->vehiculeService = $vehiculeService;
     }
 
-    public function index(VehiculeRepository $vehiculesRepository)
+    public function index()
     {
-        // $this->authorize('viewAny', Vehicule::class);
-        $vehicules = $vehiculesRepository->getAllVehicles();
-
-        $user = Auth::user();
-        $stats = $this->vehiculeService->getDashboardStats();
-        // $eq = Contenir::count();
-
         return view('feature.vehicle.vehicle-information.vehicules', [
-            'vehicules' => $vehicules,
-            'vehiclesCount' => $stats['vehiclesCount'],
-            'alertVehiclesCount' => $stats['alertVehiclesCount'],
-            'essenceVehiclesCount' => $stats['essenceVehiclesCount'],
-            'dieselVehiclesCount' => $stats['dieselVehiclesCount'],
-            'dieselVehiclePercentage' => $stats['dieselVehiclePercentage'],
-            'essenceVehiclePercentage' => $stats['essenceVehiclePercentage'],
-            'user' => $user,
-            // 'eq' => $eq,
+            'vehicules' => $this->vehiculeService->getAllVehicles(),
+            'user' => Auth::user(),
+            ...$this->vehiculeService->getDashboardStats()
         ]);
     }
 
@@ -57,7 +42,7 @@ class VehiculeController extends Controller
     {
             Vehicule::create($request->validated());
 
-            return redirect('/vehicules');
+            return redirect()->route('principal');
     }
 
     public function show($id)
@@ -85,7 +70,7 @@ class VehiculeController extends Controller
             $validateData = $request->validated();
             Vehicule::whereId($id)->update($validateData);
 
-            return redirect('/vehicules');
+            return redirect()->route('principal');
     }
 
     public function destroy($id)

@@ -13,7 +13,7 @@ use App\Http\Controllers\PapierController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PieceController;
 use App\Http\Controllers\PieceNSController;
-use App\Http\Controllers\SpecialController;
+// use App\Http\Controllers\SpecialController;
 use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\VisiteController;
 use Illuminate\Support\Facades\Route;
