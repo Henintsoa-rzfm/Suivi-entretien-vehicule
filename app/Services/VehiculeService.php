@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Vehicule;
 use App\Repositories\VehiculeRepository;
 
 class VehiculeService
@@ -18,6 +19,25 @@ class VehiculeService
         return $this->vehiculeRepository->getAllVehicles();
     }
 
+    public function store(array $data): Vehicule
+    {
+        return $this->vehiculeRepository->store($data);
+    }
+
+    public function findById(int $id) : Vehicule
+    {
+        return $this->vehiculeRepository->findById($id);
+    }
+
+    public function update(array $data, int $id): void
+    {
+         $this->vehiculeRepository->update($data, $id);
+    }
+
+    public function destroy(int $id): void
+    {
+        $this->vehiculeRepository->destroy($id);
+    }
 
     public function getDashboardStats(): array
     {
@@ -35,12 +55,6 @@ class VehiculeService
             'essenceVehiclePercentage' => $vehiclesCount > 0 ?
                 round($essenceVehicleCount*100/$vehiclesCount, 2) : 0
         ];
-    }
-
-    public function getNextVehicleId() : int
-    {
-        $maxId = $this->vehiculeRepository->getLastVehicleId() ?? 0;
-        return (int) $maxId + 1;
     }
 
 

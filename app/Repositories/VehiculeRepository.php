@@ -24,6 +24,26 @@ class VehiculeRepository
 
     }
 
+    public function store(array $data): Vehicule
+    {
+        return Vehicule::create($data);
+    }
+
+    public function findById(int $id): Vehicule
+    {
+        return Vehicule::findOrfail($id);
+    }
+
+    public function update(array $data, int $id): void
+    {
+        Vehicule::findOrfail($id)->update($data);
+    }
+
+    public function destroy(int $id): void
+    {
+        Vehicule::findOrFail($id)->delete();
+    }
+
     public function countAlertVehicles(): int
     {
         return (int) DB::table('vehicules')
@@ -49,8 +69,4 @@ class VehiculeRepository
         return (int) DB::table('vehicules')->where('Energie', 'Diesel')->count();
     }
 
-    public function getLastVehicleId() : ?int
-    {
-        return DB::table('vehicules')->max('id');
-    }
 }

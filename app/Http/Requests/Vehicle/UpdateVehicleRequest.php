@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Requests\Vehicle;
+use App\Http\Requests\Vehicle\BaseVehicleRequest;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateVehicleRequest extends FormRequest
+class UpdateVehicleRequest extends BaseVehicleRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,13 +32,4 @@ class UpdateVehicleRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'Energie.in' => 'La valeur de energie doit être Essence ou Diesel',
-            'AnneeMenCirc.before_or_equal' => 'La date de mise en circulation doît être avant ou égale aujourd\'hui',
-            'DateEntree.after' => "La date d'entrée doit être après l'année de mise en circulation ",
-            'DateEntree.before_or_equal' => "La date d'entrée doit être avant la date d'aujourd'hui",
-        ];
-    }
 }

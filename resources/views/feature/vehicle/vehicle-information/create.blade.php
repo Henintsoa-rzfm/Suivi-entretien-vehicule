@@ -28,7 +28,6 @@
                     @endif
 
                     <div class="row">
-                        <h4 class="card-title text-primary col-md-11">Véhicule numéro {{ $max }}</h4>
                         <button type="submit" class="btn">Enregistrer</button>
                     </div>
                     <br>
