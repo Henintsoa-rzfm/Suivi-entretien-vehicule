@@ -31,53 +31,41 @@ class VehiculeController extends Controller
     public function create()
     {
         $this->authorize('create', Vehicule::class);
-        $max = $this->vehiculeService->getNextVehicleId();
-
-        return view('feature.vehicle.vehicle-information.create', [
-            'max' => $max,
-        ]);
+        return view('feature.vehicle.vehicle-information.create');
     }
 
     public function store(StoreVehicleRequest $request)
     {
-            Vehicule::create($request->validated());
-
-            return redirect()->route('principal');
+        $this->vehiculeService->store($request->validated());
+        return redirect()->route('principal');
     }
 
-    public function show($id)
+    public function show(int $id)
     {
-        $vehicule = Vehicule::findOrfail($id);
         $date1 = Carbon::now();
 
         return view('feature.vehicle.vehicle-information.vehicule', [
-            'vehicule' => $vehicule,
+            'vehicule' => $this->vehiculeService->findById($id),
             'date1' => $date1,
         ]);
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
-        $vehicule = Vehicule::findOrfail($id);
-
         return view('feature.vehicle.vehicle-information.edit', [
-            'vehicule' => $vehicule,
+            'vehicule' => $this->vehiculeService->findById($id),
         ]);
     }
 
-    public function update(UpdateVehicleRequest $request, $id)
+    public function update(UpdateVehicleRequest $request, int $id)
     {
-            $validateData = $request->validated();
-            Vehicule::whereId($id)->update($validateData);
-
-            return redirect()->route('principal');
+        $this->vehiculeService->update($request->validated(), $id);
+        return redirect()->route('principal');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        $vehicule = Vehicule::findOrfail($id);
-        $vehicule->delete();
-
-        return redirect('/vehicules');
+        $this->vehiculeService->destroy($id);
+        return redirect()->route('principal');
     }
 }
