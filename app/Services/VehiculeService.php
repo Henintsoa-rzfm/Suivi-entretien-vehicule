@@ -13,6 +13,12 @@ class VehiculeService
         $this->vehiculeRepository = $vehiculeRepository;
     }
 
+    public function getAllVehicles()
+    {
+        return $this->vehiculeRepository->getAllVehicles();
+    }
+
+
     public function getDashboardStats(): array
     {
         $vehiclesCount = $this->vehiculeRepository->countVehicles();

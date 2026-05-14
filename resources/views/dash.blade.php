@@ -14,32 +14,32 @@
     <section class="grid">
         <div class="card">
         <div class="muted">Nombre de véhicule</div>
-        <div class="value">{{$vehicules}}</div>
+        <div class="value">{{$vehiclesCount}}</div>
         <div class="muted">+4% vs semaine dernière</div>
         </div>
         <div class="card">
         <div class="muted">Véhicules essence</div>
-        <div class="value">-</div>
+        <div class="value">{{ $essenceVehiclesCount }}</div>
         <div class="muted">7 %</div>
         </div>
         <div class="card">
         <div class="muted">Véhicules diesel</div>
-        <div class="value">1</div>
+        <div class="value">{{$dieselVehiclesCount}}</div>
         <div class="muted">2 %</div>
         </div>
         <div class="card">
         <div class="muted">Nombre de véhicule</div>
-        <div class="value">{{$vehicules}}</div>
+        <div class="value">{{$vehiclesCount}}</div>
         <div class="muted">+4% vs semaine dernière</div>
         </div>
         <div class="card">
         <div class="muted">Véhicules essence</div>
-        <div class="value">-</div>
+        <div class="value">{{ $essenceVehiclesCount }}</div>
         <div class="muted">7 %</div>
         </div>
         <div class="card">
         <div class="muted">Véhicules diesel</div>
-        <div class="value">1</div>
+        <div class="value">{{$dieselVehiclesCount}}</div>
         <div class="muted">2 %</div>
         </div>
     </section>
@@ -79,7 +79,7 @@
                   <div class="row">
                     <div class="col-9">
                       <div class="d-flex align-items-center align-self-start">
-                        <h3 class="mb-0 text-secondary">{{$vehicules}}</h3>
+                        <h3 class="mb-0 text-secondary">{{$vehiclesCount}}</h3>
                         <p class="text-success ml-2 mb-0 font-weight-medium"></p>
                       </div>
                     </div>

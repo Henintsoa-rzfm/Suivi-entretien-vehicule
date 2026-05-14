@@ -11,15 +11,7 @@ class Vehicule extends Model
 
     protected $fillable = ['PlaqueImmatric', 'Vehicule', 'Energie', 'Consommation', 'CV', 'AnneeMenCirc', 'DateEntree', 'KMActuel', 'detenteur_id', 'chauffeur_id'];
 
-    public function chauffeur()
-    {
-        return $this->belongsTo(Chauffeur::class);
-    }
 
-    public function detenteur()
-    {
-        return $this->belongsTo(Detenteur::class);
-    }
 
     public function interventions()
     {
