@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')    
+@section('content')
 <div class="container MonT">
 <div class="op">
   <p class="display-6 text-dark">Les interventions</p>
@@ -13,7 +13,7 @@
       <a href="{{route('nombres.create')}}" class="header_img btn btn-info btn-circle rounded-circle">
         <i class="fas fa-wrench"></i>
       </a>
-  </div>   
+  </div>
 </div>
 <section class="container">
   <div class="row">
@@ -33,7 +33,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-secondary font-weight-normal">Interventions : {{ $nbI }}</h6>
+            <h6 class="text-secondary font-weight-normal">Interventions : {{ $totalCount }}</h6>
           </div>
         </div>
       </div>
@@ -44,8 +44,8 @@
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
                   <h3 class="mb-0 text-warning">
-                  @if ($nbI> 0)
-                  {{round((($intV*100)/$nbI), 2)}} %  
+                  @if ($totalCount> 0)
+                  {{round((($validatedCount*100)/$totalCount), 2)}} %
                   @else
                       0 %
                   @endif
@@ -59,7 +59,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-secondary font-weight-normal">Réparation validée : {{$intV}}</h6>
+            <h6 class="text-secondary font-weight-normal">Réparation validée : {{$validatedCount}}</h6>
           </div>
         </div>
       </div>
@@ -70,8 +70,8 @@
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
                   <h3 class="mb-0 text-danger">
-                  @if ($nbI>0)
-                    {{round((($intE*100)/$nbI), 2)}} %
+                  @if ($totalCount>0)
+                    {{round((($pendingCount*100)/$totalCount), 2)}} %
                   @else
                       0 %
                   @endif
@@ -85,7 +85,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-secondary font-weight-normal">Réparation non validée : {{$intE}}</h6>
+            <h6 class="text-secondary font-weight-normal">Réparation non validée : {{$pendingCount}}</h6>
           </div>
         </div>
       </div>
@@ -96,8 +96,8 @@
               <div class="col-9">
                 <div class="d-flex align-items-center align-self-start">
                   <h3 class="mb-0 text-success">
-                  @if ($nbI>0)  
-                    {{round((($rep*100)/$nbI), 2)}} %
+                  @if ($totalCount>0)
+                    {{round((($finishedCount*100)/$totalCount), 2)}} %
                   @else
                       0 %
                   @endif
@@ -111,7 +111,7 @@
                 </div>
               </div>
             </div>
-            <h6 class="text-secondary font-weight-normal">Réparation terminée : {{$rep}}</h6>
+            <h6 class="text-secondary font-weight-normal">Réparation terminée : {{$finishedCount}}</h6>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
           <div class="table-responsive">
             <style> #myInput{display: none; width: 100%; height: 50px;padding: 20px; border-radius: 5px}</style>
             <input style="background:none; border:1px solid lightgrey; color:white" type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher">
-         
+
             <table class="text-center table table-hover" id="myTable">
               <thead>
                   <tr class="tet">
@@ -150,35 +150,35 @@
                     <td><a style="text-decoration:none" href="{{route('interventions.show', ['id' => $intervention->id])}}">{{ date('d M Y', strtotime($intervention->DateLimite))}}</a></td>
                     <td><a style="text-decoration:none" href="{{route('interventions.show', ['id' => $intervention->id])}}">{{$intervention->Panne}}</a></td>
                     <td><a style="text-decoration:none" href="{{route('interventions.show', ['id' => $intervention->id])}}">{{$intervention->PlaqueImmatric}}</a></td>
-                    <td>                                    
+                    <td>
                         @if ($daty < $intervention->DateIntervention AND $intervention->Validation == 'En attente')
                         <a style="text-decoration:none" href="{{route('interventions.show', ['id' => $intervention->id])}}">
                             <span style="color:"><label class="badge badge-danger">En attente</label></span>
                         </a>
                         @endif
-                        
+
                         @if ($daty < $intervention->DateIntervention AND $intervention->Validation == 'Validée')
                         <span style="color:"><label class="badge badge-primary">Date fixée</label></span>
                         @endif
 
-                        @if($daty >= $intervention->DateIntervention AND $daty <= $intervention->DateLimite AND $intervention->Validation == 'En attente') 
-                        <span style="color:"><label class="badge badge-danger">A reporter</label></span> 
+                        @if($daty >= $intervention->DateIntervention AND $daty <= $intervention->DateLimite AND $intervention->Validation == 'En attente')
+                        <span style="color:"><label class="badge badge-danger">A reporter</label></span>
                         @endif
 
-                        @if($daty >= $intervention->DateIntervention AND $daty > $intervention->DateLimite AND $intervention->Validation == 'En attente') 
-                        <span style="color:"><label class="badge badge-danger">A reporter</label></span> 
+                        @if($daty >= $intervention->DateIntervention AND $daty > $intervention->DateLimite AND $intervention->Validation == 'En attente')
+                        <span style="color:"><label class="badge badge-danger">A reporter</label></span>
                         @endif
 
-                        @if($daty >= $intervention->DateIntervention AND $daty <= $intervention->DateLimite AND $intervention->Validation == 'Validée') 
+                        @if($daty >= $intervention->DateIntervention AND $daty <= $intervention->DateLimite AND $intervention->Validation == 'Validée')
                         <span style="color: blue">
                           <label class="badge badge-warning">En cours</label>
-                        </span> 
+                        </span>
                         @endif
 
-                        @if($daty > $intervention->DateLimite AND $intervention->Validation == 'Validée') 
+                        @if($daty > $intervention->DateLimite AND $intervention->Validation == 'Validée')
                         <span style="color: blue">
                           <label class="badge badge-success">Terminée</label>
-                        </span> 
+                        </span>
                         @endif
                     </td>
                     <td>
@@ -187,7 +187,7 @@
                       @else
                         <a href="{{ route('interventions.edit', $intervention->id)}}" class="btn btn-success btn-circle">
                             <i class="fas fa-edit" style="color: white"></i>
-                        </a>  
+                        </a>
                       @endif
                     </td>
                 </tr>
@@ -204,5 +204,5 @@
   $('#myInput').trigger('focus')
   })
 </script>
-</div>    
+</div>
 @endsection
