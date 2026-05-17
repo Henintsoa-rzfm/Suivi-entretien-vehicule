@@ -9,9 +9,17 @@ class Vehicule extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['PlaqueImmatric', 'Vehicule', 'Energie', 'Consommation', 'CV', 'AnneeMenCirc', 'DateEntree', 'KMActuel', 'detenteur_id', 'chauffeur_id'];
-
-
+    protected $fillable = [
+            'PlaqueImmatric',
+            'Vehicule', 'Energie',
+            'Consommation',
+            'CV',
+            'AnneeMenCirc',
+            'DateEntree',
+            'KMActuel',
+            'detenteur_id',
+            'chauffeur_id'
+        ];
 
     public function interventions()
     {

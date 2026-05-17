@@ -11,9 +11,9 @@ class Intervention extends Model
 
     protected $fillable = ['nature', 'DateIntervention', 'lieuIntervention', 'Panne', 'mecanicien_id', 'vehicule_id', 'DateLimite', 'Validation'];
 
-    public function mecanicien()
+    public function user()
     {
-        return $this->belongsTo(Mecanicien::class);
+        return $this->belongsTo(User::class);
     }
 
     public function vehicule()

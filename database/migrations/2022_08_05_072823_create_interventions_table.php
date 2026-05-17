@@ -21,7 +21,8 @@ class CreateInterventionsTable extends Migration
             $table->string('Panne');
             $table->string('lieuIntervention');
             $table->string('Validation');
-            $table->foreignId('vehicule_id')->constrained();
+            $table->foreignId('vehicule_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
