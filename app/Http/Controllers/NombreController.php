@@ -39,8 +39,11 @@ class NombreController extends Controller
         $nombres = Nombre::all();
         $pieces = Piece::all();
         // $interventions = Intervention::all();
-        $interventions = DB::table('interventions')->join('vehicules', 'vehicules.id', 'interventions.vehicule_id')
-            ->whereNotIn('Validation', ['Validée'])->select('interventions.*')->select('interventions.*', 'vehicules.PlaqueImmatric')->get();
+        $interventions = DB::table('interventions')
+            ->join('vehicules', 'vehicules.id', 'interventions.vehicule_id')
+            ->whereNotIn('Validation', ['Validée'])->select('interventions.*')
+            ->select('interventions.*', 'vehicules.PlaqueImmatric')
+            ->get();
         $max = Nombre::max('id');
 
         return view('features.intervention.nombre.create', [

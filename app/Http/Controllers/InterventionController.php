@@ -7,46 +7,34 @@ use App\Models\Nombre;
 use App\Models\Piece;
 use App\Models\User;
 use App\Models\Vehicule;
+use App\Services\InterventionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class InterventionController extends Controller
 {
-    public function __construct()
+    public readonly InterventionService $interventions;
+
+    public function __construct(InterventionService $interventions)
     {
         $this->middleware('auth');
+        $this->interventions = $interventions;
     }
 
     public function index()
     {
-        $interventions = DB::table('interventions')
-            ->join('vehicules', 'interventions.vehicule_id', '=', 'vehicules.id')
-            ->select('interventions.*', 'vehicules.PlaqueImmatric')
-            ->orderBy('created_at', 'DESC')
-            ->get();
-        $intE = DB::table('interventions')->whereIn('Validation', ['En attente'])->count();
-        $intV = DB::table('interventions')->whereIn('Validation', ['Validée'])->count();
-        $rep = DB::table('interventions')
-            ->where('DateLimite', '<', now())
-            ->where('DateIntervention', '<', now())
-            ->where('Validation', 'Validée')->count();
         $vehicules = Vehicule::all();
         $nombres = Nombre::all();
         $pieces = Piece::all();
-        $nbI = Intervention::count();
         $daty = Carbon::now();
 
         return view('features.intervention.intervention.interventions', [
-            'interventions' => $interventions,
+            'interventions' => $this->interventions->getAllInterventions(),
             'vehicules' => $vehicules,
-            'nbI' => $nbI,
             'daty' => $daty,
             'nombres' => $nombres,
             'pieces' => $pieces,
-            'intE' => $intE,
-            'intV' => $intV,
-            'rep' => $rep,
+            ...$this->interventions->getInterventionsStats(),
 
         ]);
     }
@@ -118,7 +106,7 @@ class InterventionController extends Controller
             'vehicules' => $vehicules,
             'max' => $max,
             'pieces' => $pieces,
-            // 'nombre' => $nombre
+
         ]);
     }
 
