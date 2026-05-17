@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-{{-- <div class="container impr" style="position: relative">
-<img src="{{asset('images/visite2.png')}}" alt="" style="position: fixed; top:200px;left:700px; opacity:0.2">
-</div> --}}
 
 <div class="container py-4" style="font-family: Arial, sans-serif; color:#1a1a1a; max-width:900px; margin:auto;">
 
