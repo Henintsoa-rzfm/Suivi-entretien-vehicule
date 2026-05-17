@@ -21,7 +21,7 @@ class VehiculeController extends Controller
 
     public function index()
     {
-        return view('feature.vehicle.vehicle-information.vehicules', [
+        return view('features.vehicle.vehicle-information.vehicules', [
             'vehicules' => $this->vehiculeService->getAllVehicles(),
             'user' => Auth::user(),
             ...$this->vehiculeService->getDashboardStats()
@@ -31,7 +31,7 @@ class VehiculeController extends Controller
     public function create()
     {
         $this->authorize('create', Vehicule::class);
-        return view('feature.vehicle.vehicle-information.create');
+        return view('features.vehicle.vehicle-information.create');
     }
 
     public function store(StoreVehicleRequest $request)
@@ -44,7 +44,7 @@ class VehiculeController extends Controller
     {
         $date1 = Carbon::now();
 
-        return view('feature.vehicle.vehicle-information.vehicule', [
+        return view('features.vehicle.vehicle-information.vehicule', [
             'vehicule' => $this->vehiculeService->findById($id),
             'date1' => $date1,
         ]);
@@ -52,7 +52,7 @@ class VehiculeController extends Controller
 
     public function edit(int $id)
     {
-        return view('feature.vehicle.vehicle-information.edit', [
+        return view('features.vehicle.vehicle-information.edit', [
             'vehicule' => $this->vehiculeService->findById($id),
         ]);
     }

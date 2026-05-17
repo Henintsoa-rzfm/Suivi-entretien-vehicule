@@ -17,7 +17,7 @@ class PieceController extends Controller
         $pieces = Piece::all();
         $nbPi = Piece::count('id');
 
-        return view('pieces', [
+        return view('features.intervention.piece.pieces', [
             'pieces' => $pieces,
             'nbPi' => $nbPi,
         ]);
@@ -28,7 +28,7 @@ class PieceController extends Controller
         $pieces = Piece::all();
         $max = Piece::max('id');
 
-        return view('addpiece', [
+        return view('features.intervention.piece.create', [
             'pieces' => $pieces,
             'max' => $max,
         ]);
@@ -46,25 +46,25 @@ class PieceController extends Controller
         // ->with('success', 'Voiture enregistrée avec succès')
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         $piece = Piece::findOrfail($id);
 
-        return view('piece', [
+        return view('features.intervention.piece.piece', [
             'piece' => $piece,
         ]);
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $piece = Piece::findOrfail($id);
 
-        return view('editPiece', [
+        return view('features.intervention.piece.edit', [
             'piece' => $piece,
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $validateData = $request->validate([
             'Piece' => 'required',
@@ -75,7 +75,7 @@ class PieceController extends Controller
         return redirect('/pieces');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $piece = Piece::findOrfail($id);
         $piece->delete();

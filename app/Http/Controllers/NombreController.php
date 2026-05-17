@@ -26,7 +26,7 @@ class NombreController extends Controller
         $interventions = Intervention::all();
         $nbN = Nombre::count();
 
-        return view('nombres', [
+        return view('features.intervention.nombre.nombres', [
             'nombres' => $nombres,
             'pieces' => $pieces,
             'interventions' => $interventions,
@@ -43,7 +43,7 @@ class NombreController extends Controller
             ->whereNotIn('Validation', ['Validée'])->select('interventions.*')->select('interventions.*', 'vehicules.PlaqueImmatric')->get();
         $max = Nombre::max('id');
 
-        return view('addnombre', [
+        return view('features.intervention.nombre.create', [
             'nombres' => $nombres,
             'pieces' => $pieces,
             'interventions' => $interventions,
@@ -69,7 +69,7 @@ class NombreController extends Controller
     {
         $nombre = Nombre::findOrfail($id);
 
-        return view('nombre', [
+        return view('features.intervention.nombre.nombre', [
             'nombre' => $nombre,
         ]);
     }
