@@ -17,6 +17,6 @@ class PapierController extends Controller
             abort(403);
         }
 
-        return view('feature.vehicle.papier');
+        return view('features.vehicle.papier');
     }
 }

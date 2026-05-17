@@ -16,7 +16,7 @@
                     <div class="alert alert-danger" style="color: black">{{ $error }}</div>
                   @endforeach
                 @endif
-                
+
                 <div class="row">
                   <h4 class="card-title text-primary col-md-10">Intervention numero {{ $max + 1 }}</h4>
                   <div class="col-md-1">
@@ -73,27 +73,29 @@
                           <input type="text" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark"  placeholder="Raison de l'intervention" name="Panne"/>
                         </div>
                       </div>
-                    </div>                
+                    </div>
                     <div class="col-md-6">
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Intervenant</label>
                         <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="">
-                            
+                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="user_id">
+                                @foreach ($users as $user)
+                                <option selected value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
                           </select>
                         </div>
                       </div>
                     </div>
-  
+
                   </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Véhicule</label>
                         <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="vehicule_id">                          
+                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="vehicule_id">
                             @foreach ($vehicules as $vehicule)
-                              <option selected value="{{$vehicule->id}}">{{$vehicule->PlaqueImmatric}}</option>    
+                              <option selected value="{{$vehicule->id}}">{{$vehicule->PlaqueImmatric}}</option>
                             @endforeach
                           </select>
                         </div>
@@ -103,28 +105,28 @@
                       <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Pièce</label>
                         <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="piece_id">                       
+                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="piece_id">
                             @foreach ($pieces as $piece)
-                              <option selected value="{{$piece->id}}">{{$piece->Piece}}</option>    
+                              <option selected value="{{$piece->id}}">{{$piece->Piece}}</option>
                             @endforeach
                           </select>
                         </div>
                       </div>
                     </div>
-                    
-                </div>              
+
+                </div>
                 <div class="row" id="pieceko">
                   <input type="text" style="display:none; box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none;" class="form-control rounded bg-light text-dark" value="{{ $max+1 }}" placeholder="" name="intervention_id" readonly/>
-                  
+
                   <div class="col-md-6">
                     <div class="form-group row">
                       <label class="col-sm-3 col-form-label">Quantité</label>
                       <div class="col-sm-9">
                         <input type="number" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark"  placeholder="Quantité de la pièce" name="Nombre"/>
                       </div>
-                    </div>  
+                    </div>
                   </div>
-                  
+
                   <div class="col-md-6">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Réparation</label>
@@ -142,7 +144,7 @@
                   </div>
                   </div>
                 </div>
-                
+
               </form>
             </div>
           </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Intervention;
 use App\Models\Nombre;
 use App\Models\Piece;
+use App\Models\User;
 use App\Models\Vehicule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class InterventionController extends Controller
         $nbI = Intervention::count();
         $daty = Carbon::now();
 
-        return view('interventions', [
+        return view('features.intervention.intervention.interventions', [
             'interventions' => $interventions,
             'vehicules' => $vehicules,
             'nbI' => $nbI,
@@ -57,11 +58,13 @@ class InterventionController extends Controller
         $pieces = Piece::all();
         $max = Intervention::max('id');
         $a = Carbon::now();
+        $users = User::all();
 
-        return view('addintervention', [
+        return view('features.intervention.intervention.create', [
             'interventions' => $interventions,
             'vehicules' => $vehicules,
             'pieces' => $pieces,
+            'users' => $users,
             'max' => $max,
             'a' => $a,
         ]);
@@ -69,14 +72,6 @@ class InterventionController extends Controller
 
     public function store(Request $request)
     {
-        // $a = $request->DateIntervention;
-        // $b = Carbon::now();
-        // $d = '<div class="alert alert-danger" style="width:500px ; color:white; background:red; text-align : center; margin: auto; margin-top: 250px" ><h3>Veuillez insérer une date dans le futur</h3></div>';
-
-        // if($a < $b)
-        // {
-        //     return $d;
-        // }else{
         $validateData = $request->validate([
             'nature' => 'required',
             'DateIntervention' => 'required',
@@ -96,29 +91,29 @@ class InterventionController extends Controller
 
         Nombre::create($validateData2);
 
-        return redirect('/interventions');
+        return redirect()->route('interventions');
         // }
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         $intervention = Intervention::findOrfail($id);
         $daty = Carbon::now();
 
-        return view('intervention', [
+        return view('features.intervention.intervention.intervention', [
             'intervention' => $intervention,
             'daty' => $daty,
         ]);
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $intervention = Intervention::findOrfail($id);
         $pieces = Piece::all();
         $vehicules = Vehicule::all();
         $max = Intervention::max('id');
 
-        return view('editIntervention', [
+        return view('features.intervention.intervention.edit', [
             'intervention' => $intervention,
             'vehicules' => $vehicules,
             'max' => $max,
@@ -127,17 +122,8 @@ class InterventionController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        // $a = $request->DateIntervention;
-        // $b = $request->DateLimite;
-        // $c = Carbon::now();
-        // $d = '<h3 class="alert alert-danger" style="text-align : center; margin-top: 250px" >Il est impossible de planifier une intervention dans le passé</h3>';
-
-        // if ($a < $c || $a < $b)
-        // {
-        //     return $d;
-        // }else{
         $validateData = $request->validate([
             'nature' => 'required',
             'DateIntervention' => 'required',
@@ -150,29 +136,16 @@ class InterventionController extends Controller
 
         Intervention::whereId($id)->update($validateData);
 
-        return redirect('/interventions');
-        // }
+        return redirect()->route('interventions');
+
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $intervention = Intervention::findOrfail($id);
         $intervention->delete();
 
-        return redirect('/interventions');
+        return redirect()->route('interventions');
     }
 }
 
-        // $intervention_id = $request->intervention_id;
-// $piece_id = $request->piece_id;
-// $Nombre = $request->Nombre;
-
-// for ($i = 0 ; $i < count($Nombre) ; $i++ ) {
-//     $validateData2 = [
-//         'intervention_id' => $intervention_id[$i],
-//         'piece_id' => $piece_id[$i],
-//         'Nombre' => $Nombre[$i]
-//     ];
-//     DB::table('nombres')->insert($validateData2);
-// }
-// dd($validateData2);

@@ -27,7 +27,7 @@ class AssuranceController extends Controller
         $da = DB::table('assurances')->where('Date_exp_Assurance', '>', now())->count();
         $nbV = Vehicule::count();
 
-        return view('feature.vehicle.insurance.assurances', [
+        return view('features.vehicle.insurance.assurances', [
             'assurances' => $assurances,
             'andro' => $andro,
             'max' => $max,
@@ -43,7 +43,7 @@ class AssuranceController extends Controller
         $vehicules = Vehicule::all();
         $max = DB::table('assurances')->max('id');
 
-        return view('feature.vehicle.insurance.create', [
+        return view('features.vehicle.insurance.create', [
             'assurances' => $assurances,
             'vehicules' => $vehicules,
             'max' => $max,
@@ -75,7 +75,7 @@ class AssuranceController extends Controller
         $assurance = Assurance::findOrfail($id);
         $andro = Carbon::now();
 
-        return view('feature.vehicle.insurance.assurance', [
+        return view('features.vehicle.insurance.assurance', [
             'assurance' => $assurance,
             'andro' => $andro,
         ]);
@@ -87,7 +87,7 @@ class AssuranceController extends Controller
         $vehicules = Vehicule::all();
         $date1 = Carbon::now();
 
-        return view('feature.vehicle.insurance.edit', [
+        return view('features.vehicle.insurance.edit', [
             'assurance' => $assurance,
             'vehicules' => $vehicules,
             'date1' => $date1,
