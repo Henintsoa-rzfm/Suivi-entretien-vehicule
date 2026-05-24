@@ -9,7 +9,7 @@ class Piece extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Piece'];
+    protected $fillable = ['Piece', 'Prix'];
 
     public function nombres()
     {

@@ -9,7 +9,7 @@ class Intervention extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nature', 'DateIntervention', 'lieuIntervention', 'Panne', 'mecanicien_id', 'vehicule_id', 'DateLimite', 'Validation'];
+    protected $fillable = ['nature', 'DateIntervention', 'lieuIntervention', 'Panne', 'user_id', 'vehicule_id', 'DateLimite', 'Validation'];
 
     public function user()
     {

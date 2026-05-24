@@ -8,29 +8,31 @@ use App\Models\Piece;
 use App\Models\User;
 use App\Models\Vehicule;
 use App\Services\InterventionService;
+use App\Services\VehiculeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class InterventionController extends Controller
 {
     public readonly InterventionService $interventions;
+    public readonly VehiculeService $vehicules;
 
-    public function __construct(InterventionService $interventions)
+    public function __construct(InterventionService $interventions, VehiculeService $vehicules)
     {
         $this->middleware('auth');
         $this->interventions = $interventions;
+        $this->vehicules = $vehicules;
     }
 
     public function index()
     {
-        $vehicules = Vehicule::all();
         $nombres = Nombre::all();
         $pieces = Piece::all();
         $daty = Carbon::now();
 
         return view('features.intervention.intervention.interventions', [
             'interventions' => $this->interventions->getAllInterventions(),
-            'vehicules' => $vehicules,
+            'vehicules' => $this->vehicules->getAllVehicles(),
             'daty' => $daty,
             'nombres' => $nombres,
             'pieces' => $pieces,
@@ -65,6 +67,7 @@ class InterventionController extends Controller
             'DateIntervention' => 'required',
             'Panne' => 'required',
             'lieuIntervention' => 'required',
+            'user_id' => 'required',
             'vehicule_id' => 'required',
             'DateLimite' => 'required',
             'Validation' => 'required',
@@ -98,7 +101,7 @@ class InterventionController extends Controller
     {
         $intervention = Intervention::findOrfail($id);
         $pieces = Piece::all();
-        $vehicules = Vehicule::all();
+        $vehicules = $this->vehicules->getAllVehicules();
         $max = Intervention::max('id');
 
         return view('features.intervention.intervention.edit', [

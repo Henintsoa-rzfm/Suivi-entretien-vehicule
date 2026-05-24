@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\InterventionRepository;
+use Exception;
 
 class InterventionService
 {
@@ -15,9 +16,6 @@ class InterventionService
 
     public function getAllInterventions()
     {
-        if ($this->interventionRepository->getAllInterventions()->isEmpty()) {
-            return 'Aucune intervention trouvée.';
-        }
         return $this->interventionRepository->getAllInterventions();
     }
 

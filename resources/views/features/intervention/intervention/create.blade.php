@@ -1,195 +1,225 @@
 @extends('layouts.app')
+
 @section('content')
-<body id="totalite" class="bg-dark text-dark" style="background: /*#F2F7FD*/">
-    <br>
-    <div class="container bg-light bloc" style="align-content: center!important">
-      <h2 style="font-weight: bold" class="text-center">Planifier une intervention</h2>
-<br>
-{{-- {{$a}} --}}
-        <div class="col-12 grid-margin bg bg-light text-dark">
-          <div class="card" style="box-shadow: 5px 8px 7px 0 rgba(0,0,0,0.2); border:none">
-            <div class="card-body bg bg-light rounded">
-              <form class="form-sample" method="POST" action="{{route('interventions.store')}}"><br>
-                @csrf
-                @if($errors->any())
-                  @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger" style="color: black">{{ $error }}</div>
-                  @endforeach
-                @endif
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 py-10 px-4">
 
-                <div class="row">
-                  <h4 class="card-title text-primary col-md-10">Intervention numero {{ $max + 1 }}</h4>
-                  <div class="col-md-1">
-                    <button type="submit" class="ml-5 btn btn-primary btn-circle rounded-circle">
-                      <i class="fas fa-check"></i>
-                    </button>
-                  </div>
-                  <div class="col-md-1">
-                    <a href="{{route('pieces.create')}}" class="btn btn-secondary btn-circle rounded-circle"><i class="fas fa-cogs"></i></a>
-                  </div>
-                </div>
-                <br>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Nature de l'intervention</label>
-                      <div class="col-sm-9">
-                        <input type="text" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" placeholder="Nature" name="nature"/>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Lieu d'intervention</label>
-                      <div class="col-sm-9">
-                        <input type="text" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" placeholder="Lieu" name="lieuIntervention"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Début</label>
-                      <div class="col-sm-9">
-                        <input id="debut" onclick="Daty()" type="date" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" placeholder="Date d'intervention" name="DateIntervention"/>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Fin</label>
-                      <div class="col-sm-9">
-                        <input id="fin" onclick="deuxDates()" type="date" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" placeholder="Fin de l'intervention" name="DateLimite"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Raison</label>
-                        <div class="col-sm-9">
-                          <input type="text" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark"  placeholder="Raison de l'intervention" name="Panne"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Intervenant</label>
-                        <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="user_id">
-                                @foreach ($users as $user)
-                                <option selected value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+    <div class="max-w-3xl mx-auto">
 
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Véhicule</label>
-                        <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="vehicule_id">
-                            @foreach ($vehicules as $vehicule)
-                              <option selected value="{{$vehicule->id}}">{{$vehicule->PlaqueImmatric}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Pièce</label>
-                        <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="piece_id">
-                            @foreach ($pieces as $piece)
-                              <option selected value="{{$piece->id}}">{{$piece->Piece}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+        <!-- Header -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold tracking-tight text-slate-800">
+                Nouvelle intervention
+            </h3>
 
-                </div>
-                <div class="row" id="pieceko">
-                  <input type="text" style="display:none; box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none;" class="form-control rounded bg-light text-dark" value="{{ $max+1 }}" placeholder="" name="intervention_id" readonly/>
-
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Quantité</label>
-                      <div class="col-sm-9">
-                        <input type="number" style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark"  placeholder="Quantité de la pièce" name="Nombre"/>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Réparation</label>
-                        <div class="col-sm-9">
-                          <select style="box-shadow: 2px 4px 8px 0 rgba(0,0,0,0.2); border:none" class="form-control rounded bg-light text-dark" name="Validation">
-                              @if (Auth::user()->admin)
-                                <option>En attente</option>
-                                <option>Validée</option>
-                              @else
-                                <option>En attente</option>
-                              @endif
-                          </select>
-                        </div>
-                      </div>
-                  </div>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
+            <p class="mt-2 text-slate-500">
+                Planifiez une intervention en quelques étapes.
+            </p>
         </div>
+
+        <!-- Card -->
+        <div class="bg-white/80 backdrop-blur-xl border border-slate-200 rounded-3xl shadow-xl overflow-hidden">
+
+            <!-- Progress -->
+            <div class="px-8 pt-8">
+                <div class="flex items-center justify-between mb-6">
+
+                    <div class="flex items-center gap-3">
+                        <div id="stepIndicator1"
+                             class="w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-semibold shadow-lg shadow-indigo-200">
+                            1
+                        </div>
+
+                        <div>
+                            <p class="font-semibold text-slate-800 text-sm">Informations</p>
+                            <p class="text-xs text-slate-500">Détails de l’intervention</p>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 h-1 bg-slate-200 mx-6 rounded-full overflow-hidden">
+                        <div id="progressBar"
+                             class="h-full w-1/2 bg-indigo-600 transition-all duration-300"></div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div id="stepIndicator2"
+                             class="w-9 h-9 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-semibold">
+                            2
+                        </div>
+
+                        <div>
+                            <p class="font-semibold text-slate-500 text-sm">Assignation</p>
+                            <p class="text-xs text-slate-400">Ressources & validation</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @if($errors->any())
+                <div class="px-8 pb-4 space-y-2">
+                    @foreach ($errors->all() as $error)
+                        <div class="bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded-xl text-sm">
+                            {{ $error }}
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('interventions.store') }}" id="multiStepForm">
+                @csrf
+
+                <!-- STEP 1 -->
+                <div id="step1" class="p-8 space-y-5">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                        <!-- Nature -->
+                        <input type="text" name="nature" placeholder="Nature"
+                               class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+
+                        <!-- Lieu -->
+                        <input type="text" name="lieuIntervention" placeholder="Lieu"
+                               class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+
+                        <!-- Date -->
+                        <input type="date" name="DateIntervention"
+                               class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+
+                        <!-- Limite -->
+                        <input type="date" name="DateLimite"
+                               class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+
+                    </div>
+
+                    <!-- Panne -->
+                    <textarea name="Panne" rows="4" placeholder="Description de la panne"
+                              class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition"></textarea>
+
+                    <!-- Actions -->
+                    <div class="flex flex-col sm:flex-row justify-between gap-3 pt-4">
+
+                        <a href="{{ route('pieces.create') }}"
+                           class="px-5 py-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 text-sm text-center">
+                            Gérer les pièces
+                        </a>
+
+                        <button type="button" id="nextBtn"
+                                class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700">
+                            Suivant
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- STEP 2 -->
+                <div id="step2" class="hidden p-8 space-y-5">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                        <!-- Intervenant -->
+                        <select name="user_id"
+                                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+
+                        <!-- Véhicule -->
+                        <select name="vehicule_id"
+                                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+                            @foreach ($vehicules as $vehicule)
+                                <option value="{{ $vehicule->id }}">
+                                    {{ $vehicule->PlaqueImmatric }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <!-- Pièce -->
+                        <select name="piece_id"
+                                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+                            @foreach ($pieces as $piece)
+                                <option value="{{ $piece->id }}">{{ $piece->Piece }}</option>
+                            @endforeach
+                        </select>
+
+                        <!-- Quantité -->
+                        <input type="number" name="Nombre" placeholder="Quantité"
+                               class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+
+                        <!-- Validation -->
+                        <select name="Validation"
+                                class="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 outline-none transition">
+
+                            @if (Auth::user()->admin)
+                                <option value="En attente">En attente</option>
+                                <option value="Validée">Validée</option>
+                            @else
+                                <option value="En attente">En attente</option>
+                            @endif
+
+                        </select>
+
+                    </div>
+
+                    <input type="hidden" name="intervention_id" value="{{ $max + 1 }}">
+
+                    <!-- Actions -->
+                    <div class="flex justify-between gap-3 pt-4">
+
+                        <button type="button" id="backBtn"
+                                class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm">
+                            Retour
+                        </button>
+
+                        <button type="submit"
+                                class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700">
+                            Enregistrer
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-    </body>
+</div>
 
-    <script src="{{asset('js/jquery.js')}}"></script>
 <script>
-      function deuxDates(){
-        var x = document.getElementById('debut').value;
-        document.getElementById('fin').min= x;
-      }
-</script>
-<script>
-      function Daty(){
-        var y = document.getElementById('fin').value;
-        document.getElementById('debut').max= y;
-      }
-</script>
-<script type="text/javascript">
-  $('.repeater').on('click', '.button', function(e) {
-  e.preventDefault();
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
 
-  var $this = $(this),
-      $repeater = $this.closest('.repeater').find('[data-repeatable]'),
-      count = $repeater.length,
-      $clone = $repeater.first().clone();
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
 
-  $clone.find('[id]').each(function() {
-      this.id = this.id + '_' + count;
-  });
+    const progressBar = document.getElementById('progressBar');
 
-  $clone.find('[name]').each(function() {
-      this.name = this.name + '[' + count + ']';
-  });
+    const stepIndicator2 = document.getElementById('stepIndicator2');
 
-  $clone.find('label').each(function() {
-      var $this = $(this);
-      $this.attr('for', $this.attr('for') + '_' + count);
-  });
+    nextBtn.addEventListener('click', () => {
+        step1.classList.add('hidden');
+        step2.classList.remove('hidden');
 
-  $clone.insertBefore($this);
-});
+        progressBar.classList.remove('w-1/2');
+        progressBar.classList.add('w-full');
 
+        stepIndicator2.classList.remove('bg-slate-200', 'text-slate-500');
+        stepIndicator2.classList.add('bg-indigo-600', 'text-white');
+    });
+
+    backBtn.addEventListener('click', () => {
+        step2.classList.add('hidden');
+        step1.classList.remove('hidden');
+
+        progressBar.classList.remove('w-full');
+        progressBar.classList.add('w-1/2');
+
+        stepIndicator2.classList.add('bg-slate-200', 'text-slate-500');
+        stepIndicator2.classList.remove('bg-indigo-600', 'text-white');
+    });
 </script>
 
 @endsection

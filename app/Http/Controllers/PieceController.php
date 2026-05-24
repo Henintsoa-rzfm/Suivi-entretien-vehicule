@@ -38,8 +38,10 @@ class PieceController extends Controller
     {
         $validateData = $request->validate([
             'Piece' => 'required|unique:pieces,Piece',
+            'Prix' => 'required|numeric|min:0',
         ]);
 
+        // dd($validateData);
         Piece::create($validateData);
 
         return redirect('/interventions/create');
@@ -68,6 +70,7 @@ class PieceController extends Controller
     {
         $validateData = $request->validate([
             'Piece' => 'required',
+            'Prix' => 'required|numeric|min:0',
         ]);
 
         Piece::whereId($id)->update($validateData);
