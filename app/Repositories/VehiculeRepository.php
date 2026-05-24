@@ -8,13 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class VehiculeRepository
 {
-    protected readonly Vehicule $vehicules;
-
-    public function __construct(Vehicule $vehicules)
-    {
-        $this->vehicules = $vehicules;
-    }
-
     public function getAllVehicles(): LengthAwarePaginator
     {
         return DB::table('vehicules')
@@ -56,17 +49,17 @@ class VehiculeRepository
 
     public function countVehicles(): int
     {
-        return (int) DB::table('vehicules')->count();
+        return (int) Vehicule::count();
     }
 
     public function countEssenceVehicles(): int
     {
-        return (int) DB::table('vehicules')->where('Energie', 'Essence')->count();
+        return (int) Vehicule::essence()->count();
     }
 
     public function countDieselVehicles(): int
     {
-        return (int) DB::table('vehicules')->where('Energie', 'Diesel')->count();
+        return (int) Vehicule::diesel()->count();
     }
 
 }
