@@ -143,7 +143,7 @@
                 @foreach ($interventions as $intervention)
                 <tr>
                     <style>
-                        td a{color: white!important};
+                        td a{color: black!important};
                     </style>
                     <td><a style="text-decoration:none" href="{{route('interventions.show', ['id' => $intervention->id])}}">{{$intervention->nature}}</a></td>
                     <td><a style="text-decoration:none" href="{{route('interventions.show', ['id' => $intervention->id])}}">{{date( 'd M Y',strtotime($intervention->DateIntervention))}}</a></td>
