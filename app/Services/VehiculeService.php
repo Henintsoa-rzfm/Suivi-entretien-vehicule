@@ -45,7 +45,8 @@ class VehiculeService
 
     private function validatePlaque(array $data): void
     {
-        if (Vehicule::where('PlaqueImmatric', $data['PlaqueImmatric'])->exists()) {
+        // Faux négatif
+        if (Vehicule::where('PlaqueImmatric' , $data['PlaqueImmatric'])->exists()) {
             throw new VehiculeException('La plaque d\'immatriculation existe déjà.');
         }
         if (strlen($data['PlaqueImmatric']) < 1) {
