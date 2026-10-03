@@ -24,19 +24,21 @@ class VehiculeController extends Controller
         return view('features.vehicle.vehicle-information.vehicules', [
             'vehicules' => $this->vehiculeService->getAllVehicles(),
             'user' => Auth::user(),
-            ...$this->vehiculeService->getDashboardStats()
+            ...$this->vehiculeService->getDashboardStats(),
         ]);
     }
 
     public function create()
     {
         $this->authorize('create', Vehicule::class);
+
         return view('features.vehicle.vehicle-information.create');
     }
 
     public function store(StoreVehicleRequest $request)
     {
         $this->vehiculeService->store($request->validated());
+
         return redirect()->route('principal');
     }
 
@@ -60,12 +62,14 @@ class VehiculeController extends Controller
     public function update(UpdateVehicleRequest $request, int $id)
     {
         $this->vehiculeService->update($request->validated(), $id);
+
         return redirect()->route('principal');
     }
 
     public function destroy(int $id)
     {
         $this->vehiculeService->destroy($id);
+
         return redirect()->route('principal');
     }
 }

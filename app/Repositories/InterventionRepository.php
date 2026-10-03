@@ -1,42 +1,37 @@
 <?php
 namespace App\Repositories;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Intervention;
 
 class InterventionRepository
 {
     public function getAllInterventions()
     {
-        return DB::table('interventions')
-            ->join('vehicules', 'interventions.vehicule_id', '=', 'vehicules.id')
-            ->select('interventions.*', 'vehicules.PlaqueImmatric')
-            ->orderBy('created_at', 'DESC')
+        return Intervention::with('vehicule')
+            ->latest()
             ->get();
     }
 
     public function countInterventions(): int
     {
-        return (int) DB::table('interventions')->count();
+        return (int) Intervention::count();
     }
 
     public function countInterventionsPendingStatus() : int
     {
-        return (int)DB::table('interventions')
-                ->whereIn('Validation', ['En attente'])
+        return (int) Intervention::whereIn('Validation', ['En attente'])
                 ->count();
     }
 
     public function countInterventionsValidatedStatus() : int
     {
-        return (int)DB::table('interventions')
-                ->whereIn('Validation', ['Validée'])
+        return (int)Intervention::whereIn('Validation', ['Validée'])
                 ->count();
     }
 
     public function countInterventionsFinishedStatus() : int
     {
-        return (int)DB::table('interventions')
-                ->whereIn('Validation', ['Validée'])
+        return (int) Intervention::whereIn('Validation', ['Validée'])
                 ->count();
     }
 
