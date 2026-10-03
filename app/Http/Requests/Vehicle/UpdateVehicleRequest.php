@@ -20,16 +20,9 @@ class UpdateVehicleRequest extends BaseVehicleRequest
      */
     public function rules(): array
     {
-        return [
-            'PlaqueImmatric' => 'required|max:10',
-            'Vehicule' => 'required',
-            'Energie' => 'required|in:Essence,Diesel',
-            'Consommation' => 'required|numeric',
-            'CV' => 'required|numeric',
-            'AnneeMenCirc' => 'required|date|before_or_equal:today',
-            'DateEntree' => 'required|date|after:AnneeMenCirc|before_or_equal:today',
-            'KMActuel' => 'required|numeric',
-        ];
+        return array_merge(parent::rules(), [
+            'PlaqueImmatric' => ['required', 'max:10'],
+        ]);
     }
 
 }

@@ -4,17 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Vehicule;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
 
 class VehiculeRepository
 {
     public function getAllVehicles(): LengthAwarePaginator
     {
-        return DB::table('vehicules')
-            ->select('vehicules.*')
-            ->orderBy('created_at', 'desc')
-            ->paginate(4);
-
+        return Vehicule::latest()->paginate(4);
     }
 
     public function store(array $data): Vehicule
@@ -39,11 +34,11 @@ class VehiculeRepository
 
     public function countAlertVehicles(): int
     {
-        return (int) DB::table('vehicules')
-            ->join('contenirs', 'vehicules.id', 'contenirs.vehicule_id')
-            ->join('equipements', 'equipements.id', 'contenirs.equipement_id')
-            ->whereRaw('vehicules.KMActuel-contenirs.dernierKM >= equipements.kilometrageMax')
-            ->select('vehicules.*', 'contenirs.designation')
+        return (int) Vehicule::query()
+            ->join('contenirs', 'vehicules.id', '=', 'contenirs.vehicule_id')
+            ->join('equipements', 'contenirs.equipement_id', '=', 'equipements.id')
+            ->whereRaw('vehicules.KMActuel - contenirs.dernierKM >= equipements.kilometrageMax')
+            ->distinct()
             ->count('vehicules.id');
     }
 
